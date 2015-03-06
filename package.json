@@ -1,0 +1,12 @@
+{
+  "name": "ichh",
+  "version": "0.0.1",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.11.1",
+    "body-parser": "^1.10.2",
+    "mongoose": "^3.8.22",  
+	  "method-override" : "~2.0.2"
+  }
+}
+

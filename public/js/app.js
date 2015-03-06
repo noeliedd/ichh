@@ -1,0 +1,1 @@
+angular.module('ichhApp', ['ngRoute','ngResource', 'appRoutes', 'MainCtrl','UserCtrl', 'NerdService', 'GeekCtrl', 'GeekService']);
