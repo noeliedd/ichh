@@ -9,13 +9,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		})
 		.when('/addUser', {
 			templateUrl: 'views/addUser.html',
-			controller: 'UserController'
+			controller: 'AddUserController'
     })
+		.when('/listUsers', {
+			templateUrl: 'views/listUsers.html',
+			controller: 'ListUserController'
+		})  
 		.when('/addRoute', {
 			templateUrl: 'views/addRoute.html',
 			controller: 'RouteController'
 		})  
-
 
 	$locationProvider.html5Mode(true);
 

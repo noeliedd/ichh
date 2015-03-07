@@ -1,6 +1,6 @@
 angular.module('UserCtrl', [])
-  
-.controller('UserController',['$scope','$resource', function($scope, $resource) {
+
+.controller('AddUserController',['$scope','$resource', function($scope, $resource) {
      var AddUser = $resource('/api/addUser');
      $scope.addUser = function(){
         console.log($scope.adminCheck);
@@ -26,5 +26,9 @@ angular.module('UserCtrl', [])
         $scope.phoneNumber ="";
         $scope.adminCheck = false;
       };  
-  }
-]);
+  }                                 
+])
+.controller('ListUserController',function($scope,GetUsers) {
+    $scope.users = GetUsers.query(function() {
+  });  
+});

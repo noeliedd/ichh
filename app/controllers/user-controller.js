@@ -9,3 +9,9 @@ module.exports.addUser = function(req,res){
       }            
   });
 }
+module.exports.getUsers = function(req,res){  
+  User.find({}, function (err, results) {
+    res.json(results);   
+    console.log(results); 
+  });
+}
