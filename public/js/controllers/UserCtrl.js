@@ -1,29 +1,30 @@
 angular.module('UserCtrl', [])
   
 .controller('UserController',['$scope','$resource', function($scope, $resource) {
-    var AddUser = $resource('/api/addUser');
-     $scope.array =[];
+     var AddUser = $resource('/api/addUser');
      $scope.addUser = function(){
+        console.log($scope.adminCheck);
         var addUser = new AddUser();
-        addUser.firstName = $scope.firstName;
-        addUser.surname = $scope.surname;
-        addUser.phoneNumber = $scope.phoneNumber;
-        addUser.email = $scope.email;
-        addUser.password = $scope.password;
-        
-       console.log(addUser);
-        //addUser.role = $scope.role;
-        addUser.$save(function(result){
+          addUser.firstName = $scope.firstName;
+          addUser.surname = $scope.surname;
+          addUser.phoneNumber = $scope.phoneNumber;
+          addUser.email = $scope.email;
+          addUser.password = $scope.password;
+          addUser.admin = $scope.adminCheck;
+          addUser.$save(function(result){
           console.log(result);
-        });
-        
-      $scope.array.push({firstName : $scope.firstName, surname : $scope.surname, email : $scope.email, password: $scope.password, phoneNumber: $scope.phoneNumber});    
+            if(result.isUndefinedOrNull){
+              alert("User succesfully inserted into database");
+            }else{
+              alert("Error Occurred Inserting into database");            
+            }
+        });          
         $scope.firstName ="";
         $scope.surname ="";
         $scope.email ="";
         $scope.password ="";
         $scope.phoneNumber ="";
-        //$scope.role ="";
+        $scope.adminCheck = false;
       };  
   }
 ]);

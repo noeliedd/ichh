@@ -1,5 +1,5 @@
 <div class ="container">
-  <div class="jumbotron text-center">
+  <div class="jumbotron">
     <h3>Add User</h3>
     <form ng-submit="addUser()" class="form-horizontal">
       <div class="form-group">
@@ -36,14 +36,15 @@
         <div class="col-sm-offset-2 col-sm-10">
           <div class="checkbox">
             <label>
-              <input type="checkbox"> Admin User
+              <input type="checkbox" ng-model="adminCheck" ng-init="adminCheck=false"  ng-true-value="true" ng-false-value="false"> 
+                Admin User
             </label>
           </div>
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default">Add User</button>
+          <button type="submit" class="btn btn-primary btn pull-right btn-lg">Add User</button>
         </div>
       </div>
     </form>
