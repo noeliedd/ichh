@@ -1,9 +1,21 @@
 <div class ="container">
   <div class="jumbotron">
-    <h3>List Users</h3>
-
-  </div>
-        <ul ng-repeat="user in users">
-        <li>{{user.firstName}}</li>
-    </ul>
+    <h3>List Users</h3>    
+<div class="table-responsive">
+  <table class="table" >
+    <tr>
+      <th><a href="" ng-click="predicate='-firstName'; reverse=!reverse">First Name</a></th>
+      <th><a href="" ng-click="predicate='-surname'; reverse=!reverse">Surname</a></th>
+      <th><a href="" ng-click="predicate='-email'; reverse=!reverse">Email</a></th>
+      <th><a href="" ng-click="predicate='-admin'; reverse=!reverse">Admin User</a></th>
+      <th>Phone Number</th>
+    </tr>
+    <tr ng-repeat="user in users | orderBy:predicate:reverse">
+      <td>{{user.firstName}}</td>
+      <td>{{user.surname}}</td>      
+      <td>{{user.email}}</td>
+      <td>{{user.admin}}</td>
+      <td>{{user.phoneNumber}}</td>
+  </tr>
+  </table>
 </div>

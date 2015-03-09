@@ -1,6 +1,7 @@
 angular.module('UserCtrl', [])
 
 .controller('AddUserController',['$scope','$resource', function($scope, $resource) {
+  	$scope.header = 'Add User';	
      var AddUser = $resource('/api/addUser');
      $scope.addUser = function(){
         console.log($scope.adminCheck);
@@ -29,6 +30,8 @@ angular.module('UserCtrl', [])
   }                                 
 ])
 .controller('ListUserController',function($scope,GetUsers) {
+    $scope.predicate = 'firstName';
     $scope.users = GetUsers.query(function() {
+      
   });  
 });
