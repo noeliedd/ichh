@@ -5,7 +5,8 @@ var express        = require('express'),
     bodyParser     = require('body-parser'),
     methodOverride = require('method-override'),
     user = require('./app/controllers/user-controller.js'),
-    route = require('./app/controllers/route-controller.js');
+    route = require('./app/controllers/route-controller.js'),
+    routeDrop = require('./app/controllers/routeDrop-controller.js');
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -36,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-f
 //Mobile REST API
 app.get("/api/getRoute", route.getRoute);
 app.get("/api/activeRoutes", route.activeRoutes);
+app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
 app.post("/api/loginUser", user.loginUser);
 //Web REST API
 app.post("/api/addUser", user.addUser);

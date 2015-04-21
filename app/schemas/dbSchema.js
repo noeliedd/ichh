@@ -16,6 +16,17 @@ dbSchema = {
         isActive:{type :Boolean, required: false},
         dateCreated:{type: Date, default: Date.now},
         path : { type : Array , "default" : [] }
-    }
+    },
+    routeDrop:{
+        routeId:{type:String, required: false},
+        date:{type: Date, default: Date.now},
+        totalMale:{type: Number},
+        totalMaleFed:{type: Number},
+        totalMaleClothed:{type: Number},
+        totalFemale:{type: Number},
+        totalFemaleFed:{type: Number},
+        totalFemaleClothed:{type: Number},
+        coordinates : { type : Array , "default" : [] }
+    }  
 }
 module.exports = dbSchema;  
