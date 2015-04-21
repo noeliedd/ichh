@@ -1,25 +1,24 @@
 angular.module('UserCtrl', [])
 
 .controller('AddUserController',['$scope','$resource', function($scope, $resource) {
-  	$scope.header = 'Add User';	
-     var AddUser = $resource('/api/addUser');
+     var AddUser = $resource('/api/addUser');  
      $scope.addUser = function(){
-        console.log($scope.adminCheck);
-        var addUser = new AddUser();
+          var addUser = new AddUser();
           addUser.firstName = $scope.firstName;
           addUser.surname = $scope.surname;
           addUser.phoneNumber = $scope.phoneNumber;
           addUser.email = $scope.email;
           addUser.password = $scope.password;
           addUser.admin = $scope.adminCheck;
-          addUser.$save(function(result){
-          console.log(result);
-            if(result.isUndefinedOrNull){
-              alert("User succesfully inserted into database");
+          addUser.$save(function(response) {
+            if(response.firstName){
+              alert("User Added");
             }else{
-              alert("Error Occurred Inserting into database");            
+              alert("Error occurred, user not inserted");
             }
-        });          
+        }, function(error) {
+            alert(502 +"Internal Server Error ");
+        });         
         $scope.firstName ="";
         $scope.surname ="";
         $scope.email ="";
@@ -29,9 +28,8 @@ angular.module('UserCtrl', [])
       };  
   }                                 
 ])
-.controller('ListUserController',function($scope,GetUsers) {
+.controller('ListUsersController',function($scope,GetUsers) {
     $scope.predicate = 'firstName';
-    $scope.users = GetUsers.query(function() {
-      
+    $scope.users = GetUsers.query(function() {      
   });  
 });
