@@ -1,33 +1,33 @@
 <div class ="container">
   <div class="jumbotron">
-    <h5>Add User</h5>
-    <form ng-submit="addUser()" class="form-horizontal">
+    <h3>Add User</h3>
+    <form ng-submit="addUser()" id ="addUserForm" class="form-horizontal">
       <div class="form-group">
-        <label for="firstName" class="col-sm-2 control-label">First Name</label>
+        <label for="firstName" class="col-sm-4 control-label">First Name</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" ng-model="firstName" placeholder="First Name" required= true>
         </div>
       </div>   
       <div class="form-group">
-        <label for="surname" class="col-sm-2 control-label">Surname</label>
+        <label for="surname" class="col-sm-4 control-label">Surname</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" ng-model="surname" placeholder="Surname" required= true>
         </div>
       </div>  
       <div class="form-group">
-        <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
+        <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
         <div class="col-sm-6">
           <input type="tel" class="form-control" ng-model="phoneNumber" placeholder="Phone Number" required= true>
         </div>
       </div>       
       <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email</label>
+        <label for="email" class="col-sm-4 control-label">Email</label>
         <div class="col-sm-6">
           <input type="email" class="form-control" ng-model="email" placeholder="Email" required= true>
         </div>
       </div>
       <div class="form-group">
-        <label for="password" class="col-sm-2 control-label">Password</label>
+        <label for="password" class="col-sm-4 control-label">Password</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" ng-model="password" placeholder="Password" required= true>
         </div>
@@ -43,8 +43,8 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary btn pull-right btn-lg">Add User</button>
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-lg btn-primary center-block btn-block btn-signin">Add User</button>
         </div>
       </div>
     </form>

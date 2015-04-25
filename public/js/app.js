@@ -1,1 +1,2 @@
-angular.module('ichhApp', ['ngRoute','ngResource', 'appRoutes', 'MainCtrl','UserCtrl','RouteCtrl','Service']);
+angular.module('ichhApp', ['ngRoute','ngResource','ui.bootstrap', 'appRoutes','NavBarCtrl', 'AuthCtrl','UserCtrl','RouteCtrl','RouteDropsCtrl','Service']);
+

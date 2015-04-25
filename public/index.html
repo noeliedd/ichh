@@ -5,7 +5,7 @@
 	<base href="/">
 
 	<title>Inner City Helping Homeless</title>  
-
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 	<!-- CSS -->
 	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
@@ -14,21 +14,25 @@
 	<script src="libs/angular/angular.min.js"></script>
 	<script src="libs/angular-route/angular-route.min.js"></script>
 	<script src="libs/angular-resource/angular-resource.min.js"></script>  
+	<script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>   
+  <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>  
   <script src="libs/jquery/dist/jquery.min.js"></script>
   <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
   
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/UserCtrl.js"></script>
 	<script src="js/controllers/RouteCtrl.js"></script>
-	<script src="js/services/service.js"></script>  
-	<script src="js/controllers/MainCtrl.js"></script>
+ 	<script src="js/controllers/RouteDropsCtrl.js"></script>
+	<script src="js/controllers/AuthCtrl.js"></script>  
+	<script src="js/controllers/NavBarCtrl.js"></script>   
+	<script src="js/services/service.js"></script> 
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 </head>
 <body ng-app="ichhApp" >
-  <div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+  <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid" ng-controller="NavCtrl">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -36,12 +40,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">ICHH</a>            
+          <a class="navbar-brand" href="http://www.innercityhelpinghomeless.ie/">
+            <img href="http://www.innercityhelpinghomeless.ie/" alt="Website Logo" src="img/logo.png" />
+          </a>            
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/home">Home <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -51,6 +57,8 @@
                 <li><a href="#">Edit User</a></li>
                 <li><a href="/listUsers">View Users</a></li>
                 <li class="divider"></li>
+                <li><a href="/" ng-show="!currentUser">Login</a></li>
+                <li><a href="/" ng-click="logout()" ng-show="currentUser">Logout</a></li>
                 <li><a href="#">Separated link</a></li>
               </ul>
             </li>
@@ -61,7 +69,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/addRoute">Add Route</a></li>
                 <li><a href="/listRoutes">View Routes</a></li>
-                <li><a href="#">View Drops</a></li>
+                <li><a href="/viewDrops">View Drops</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Separated link</a></li>
               </ul>
@@ -74,5 +82,6 @@
 	<div ng-view></div>
 </div>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ5YrdycMYY8O6Hj7uyDracEz_VPh97WM&sensor=true"></script>
+      <script src="js/overlappingMarkerSpiderfier.min.js"></script>
 </body>
 </html>

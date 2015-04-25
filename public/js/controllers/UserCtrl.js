@@ -1,6 +1,8 @@
 angular.module('UserCtrl', [])
 
-.controller('AddUserController',['$scope','$resource', function($scope, $resource) {
+.controller('AddUserController',['$scope','$resource','$rootScope', function($scope, $resource,$rootScope) {
+    console.log("hear I am");
+    console.log($rootScope.currentUser);
      var AddUser = $resource('/api/addUser');  
      $scope.addUser = function(){
           var addUser = new AddUser();

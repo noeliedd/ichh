@@ -8,7 +8,7 @@ angular.module('RouteCtrl', [])
     initialize();
 
     function initialize() {
-        var mapOptions = {zoom: 14,center: coords,mapTypeId: google.maps.MapTypeId.ROADMAP};
+        var mapOptions = {zoom: 12,center: coords,mapTypeId: google.maps.MapTypeId.ROADMAP};
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         var image = 'img/homePin.png';
         marker = new google.maps.Marker({map: map,position: coords,icon: image});    
@@ -17,14 +17,14 @@ angular.module('RouteCtrl', [])
             strokeOpacity: 1.0,
             strokeWeight: 2 
         };
-        //Create polyline and set map to it
+ //Create polyline and set map to it
         poly = new google.maps.Polyline(polyOptions);
         poly.setMap(map);
         //Add Liseteners to map
         google.maps.event.addListener(map, 'click', addLatLng);
         google.maps.event.addListener(map, 'click', addMarkers);
     }
-    //Add marker on click event and store in array "markerArray"
+//Add marker on click event and store in array "markerArray"
     function addMarkers(event){ 
         //var image = 'images/marker.png';      
         marker = new google.maps.Marker({
@@ -32,9 +32,10 @@ angular.module('RouteCtrl', [])
           //icon: image,
         map: map
       });
+        console.log(event.latLng);//////////////////Debug
         markerArray.push(marker);
     }
-    // Set the map on all markers 
+ // Set the map on all markers 
     function setAllMap(map) {
       for (var i = 0; i < markerArray.length; i++) {
         markerArray[i].setMap(map);
@@ -52,7 +53,7 @@ angular.module('RouteCtrl', [])
       length = $("distKm").value = Math.round(length/1000 * 100) / 100;
       document.getElementById("routeDistance").innerHTML = "Total Distance Km :" +length;
     }
-    //Clear map of markers and polylines, Empty all arrays, set length to 0.
+//Clear map of markers and polylines, Empty all arrays, set length to 0.
     $scope.clearMap = function(){
        setAllMap(null);
        markerArray=[];
@@ -63,7 +64,7 @@ angular.module('RouteCtrl', [])
         length =0;
         document.getElementById("routeDistance").innerHTML = "Total Distance Km :" +length;           
     }
-    //clear the last marker and polyline added to the map
+//clear the last marker and polyline added to the map
     $scope.clearLastMarker = function(){
       if(markerArray.length >0){
            markerArray[markerArray.length -1].setMap(null)

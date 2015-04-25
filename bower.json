@@ -1,10 +1,11 @@
 {
-	"name": "ichh-angular",
-	"version": "0.0.1",
-	"dependencies": {
-		"bootstrap": "latest",
-		"angular": "latest",
-		"angular-route": "latest",
-    "angular-resource": "latest"	
-	}
+  "name": "ichh-angular",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-resource": "latest",
+    "angular-bootstrap": "~0.12.1"
+  }
 }
