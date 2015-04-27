@@ -4,36 +4,46 @@
             <div id ="dropsMap"></div> 
          </div>
         <div class ="col-md-3">
-            <h3>View Drops</h3>            
-            <div ng-controller="DatepickerCtrl">
-                <div class="row">
-                    <label>From:</label>
-                    <div class="col-md-12">
-                        <p class="input-group">
-                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fromDate" is-open="openedFrom" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="openFrom($event)">
-                              <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                          </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <label>To:</label>
-                    <div class="col-md-12">
-                        <p class="input-group">
-                          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" is-open="openedTo" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="openTo($event)">
-                              <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                          </span>
-                        </p>
-                    </div>
-                    <button type="button" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="submitQuery()" id="queryDropsBtn">Find Drops</button>
-                </div>              
-            </div>
+            <h3>View Drops</h3>   
+            <form><!--query drop form-->
+              <div ng-controller="DropCriteriaCtrl">
+                  <div class="row"><!--Date To row-->             
+                        <label>Route:</label>
+                        <div class="col-md-12">
+                          <select ng-model="selectedRoute" ng-options="route as route.name for route in routes " class="form-control">  
+                              <option value="">All</option>
+                          </select>                                         
+                        </div>                 
+                  </div><!--END row-->                 
+                  <div class="row"><!--Date From row-->
+                      <label>From:</label>
+                      <div class="col-md-12">
+                          <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fromDate" is-open="openedFrom" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="openFrom($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                              </button>
+                            </span>
+                          </p>
+                      </div>
+                  </div><!--END row-->
+                  <div class="row"><!--Date To row-->
+                      <label>To:</label>
+                      <div class="col-md-12">
+                          <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" is-open="openedTo" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="openTo($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                              </button>
+                            </span>
+                          </p>
+                      </div>
+                      <button type="submit" id ="queryDropsBtn" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="submitQuery()" id="queryDropsBtn">Find Drops</button>
+                  </div><!--END row-->                    
+              </div><!--END datepickerCtrl-->
+            </form><!--END query drop form-->           
        </div>
   </div>
-</div>
+</div><!--END container-->

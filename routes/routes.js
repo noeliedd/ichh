@@ -7,6 +7,7 @@ module.exports = function(app) {
         cookieParser   = require('cookie-parser'),  
         session        = require('express-session'),   
         LocalStrategy  = require('passport-local').Strategy;
+  
   var User = require('../app/models/user');
   app.use(session({ secret: 'The Best Secret in the world', resave: true,saveUninitialized: true }));// For         Development, should not leave here  
   app.use(cookieParser());  
@@ -32,12 +33,6 @@ module.exports = function(app) {
       console.log(user.name);
       return done(null, user);
     });
-
-    /*if (email === 'a' && password === 'a'){
-      var user = { firstName: 'Alice', lastName: 'Wonderland' };
-      return done(null, user);
-    }
-    return done(null, false, {message: 'Unable to login'});*/
   }));
 
   passport.serializeUser(function(user, done) {
@@ -56,10 +51,7 @@ module.exports = function(app) {
       next();
   };
 
-  app.get('/users', auth, function(req, res){
-    res.json([{email: 123},{email: 234}]);
-  });
-
+//---------------------- authentication routes---------------------------
   app.get('/loggedin', function(req, res){
     res.send(req.isAuthenticated() ? req.user : '0');
   });
@@ -75,20 +67,21 @@ module.exports = function(app) {
     res.sendStatus(200);
   });   
 
-  // server routes ===========================================================
-  // handle things like api calls
-  // authentication routes
-  //Mobile REST API
-  app.get("/api/getRoute", route.getRoute);
-  app.get("/api/activeRoutes", route.activeRoutes);
+//--------------------server routes -------------------------------
+//-----------------Mobile REST API Calls---------------------------
+  app.post("/api/loginUser", user.loginUser);  
   app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
-  app.post("/api/loginUser", user.loginUser);
-  //Web REST API
+  app.get("/api/getRoute", route.getRoute);
+  
+//-----------------Mobile & Web REST API Calls----------------------  
+  app.get("/api/getActiveRoutes", route.getActiveRoutes);
+
+// ---------------Angular frontend Website REST API--------------------
   app.post("/api/addUser", user.addUser);
   app.get('/api/getUsers', user.getUsers);
   app.post("/api/addRoute", route.addRoute);
   app.get("/api/getRouteDrop", routeDrop.getRouteDrop);
-  // frontend routes =========================================================
+
   // route to handle all angular requests
   app.get('*', function(req, res) {
     var path = require('path'); res.sendFile(path.join(__dirname,'../public', 'index.html'));

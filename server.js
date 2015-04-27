@@ -22,7 +22,7 @@ var express        = require('express'),
   // configuration ===========================================
   var db = require('./config/db');
   mongoose.connect(db.url);
-  var port = process.env.PORT || 8080; // set our port
+  var port = process.env.PORT || 3000; // set our port
 
   // get all data/stuff of the body (POST) parameters
 

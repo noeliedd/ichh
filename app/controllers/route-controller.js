@@ -1,5 +1,5 @@
 var Route = require('../models/route'); 
-
+//--------------------------Add Route-------------------------------------
 module.exports.addRoute = function(req,res){  
   var route = new Route(req.body);  
   route.save(function (err, result) {  
@@ -10,12 +10,15 @@ module.exports.addRoute = function(req,res){
       }      
   });
 }
-module.exports.activeRoutes = function(req,res){  
-  Route.find({ 'isActive': true },'-dateCreated -path', function (err, results) {
+//--------------------Returns all active routes from db----------------------
+module.exports.getActiveRoutes = function(req,res){  
+  Route.find({ 'isActive': true },'-isActive -path', function (err, results) {
     res.json(results);   
     console.log(results); 
   });
 }
+//--------------------------Get Route for given id----------------------------
+//Called from mobile route selection tab to return the coordinates of chosen route
 module.exports.getRoute   = function(req,res){  
   console.log(req.query.route_id);
   Route.findOne({ '_id': req.query.route_id },'-dateCreated', function (err, results) {
@@ -23,25 +26,3 @@ module.exports.getRoute   = function(req,res){
     console.log(results); 
   });
 }
-/*module.exports.getUsers = function(req,res){  
-  User.find({},'-password', function (err, results) {
-    res.json(results);   
-    console.log(results); 
-  });
-}
-module.exports.loginUser = function(req,res){
-  console.log(req.body);
-  User.find({email:req.body.email,password:req.body.password},function(err, user){
-   if(err){
-     res.send(err);
-   }else{
-      if(!user.length){
-        console.log("it doesnt exist");
-        res.send("Invalid Username or password");
-      }else{
-        console.log("Its in the database");    
-        res.send("valid");
-      }
-   }
-  })
-}*/

@@ -1,25 +1,19 @@
 angular.module('RouteDropsCtrl', [])
 
-.controller('ViewDropsController', function($scope,shareDataService) {
+//Controller initialises a google map with no markers set
+// Watches a shared data service, updates an array everytime the shared service changes and applies the markers to the map
+.controller('ViewDropsController', function($scope,DropsDataService) {
      var dropCoordinates =[];
      $scope.$watch(function () {
-         return shareDataService.getList();
+         return DropsDataService.getList();
      },                  
       function(newVal, oldVal) {
-          console.log("newVal");
-          console.log(newVal);
-          console.log(oldVal); 
           dropCoordinates =[];
           for(var i =0; i<newVal.length;i++){
-            dropCoordinates.push(newVal[i].coordinates[0]);
-            console.log(newVal[i].coordinates[0].k);
-            console.log(newVal[i].coordinates[0].D);
+              dropCoordinates.push(newVal[i].coordinates[0]);
           }       
-         addMarkers();
-         for(var j =0; j<dropCoordinates.length;j++){
-            console.log(dropCoordinates[j]);
-         }
-    }, true);
+           addMarkers();
+      }, true);
     
     var marker,coords, map, oms, iw;
     var googleMap = google.maps;
@@ -63,7 +57,19 @@ angular.module('RouteDropsCtrl', [])
   }                                  
 )
 
-.controller('DatepickerCtrl', function ($scope, GetDrops,shareDataService ) {
+//angular ui controller to get dates. Dates submitted are passed to the GetDrops Service
+//The Get Drops service returns the drops for the given dates which is passed to shared data service
+.controller('DropCriteriaCtrl', function ($scope, GetDrops,GetActiveRoutes,DropsDataService ) {
+//     $scope.routes = GetActiveRoutes;
+//     $scope.selectedRoute = $scope.routes[0];
+      $scope.$watch('selectedRoute', function(newVal){
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        console.log(newVal);
+    })
+    GetActiveRoutes.then(function(d){
+         $scope.routes =d;
+         console.log($scope.routes);
+  })
   $scope.today = function() {
     $scope.fromDate = null;
     $scope.toDate = null;
@@ -90,24 +96,36 @@ angular.module('RouteDropsCtrl', [])
   $scope.format = $scope.formats[1];
   
   $scope.submitQuery = function(){
+    console.log($scope.selectedRoute);
     
    /* if ($scope.fromDate === null || $scope.fromDate === undefined || $scope.toDate === null || $scope.toDate === undefined || $scope.fromDate > $scope.toDate){
       alert("Invalid Dates selected");
     }
     else{*/
-          GetDrops.getAll($scope.fromDate,$scope.toDate).then(function(d){
-          $scope.lists = shareDataService.getList();
+    console.log($scope.selectedRoute);
+      console.log(angular.isDefined($scope.selectedRoute));
+      if(!angular.isDefined($scope.selectedRoute)||$scope.selectedRoute ===null){
+        console.log("Gone in here" );
+          GetDrops.getDrops($scope.fromDate,$scope.toDate,"all").then(function(d){
+          $scope.lists = DropsDataService.getList();
           console.log("Initial call");
           console.log($scope.lists);
          //console.log(d);
         //alert("Ye Baby");
-     });      
+       });   
+      }else{
+          GetDrops.getDrops($scope.fromDate,$scope.toDate,$scope.selectedRoute._id).then(function(d){
+          $scope.lists = DropsDataService.getList();
+          console.log("Initial call");
+          console.log($scope.lists);     
+         });  
+      }
+   
    // }
   }
 })
-
-.controller('ListRoutesController',function($scope,GetRoutes) {
-    $scope.routes = GetRoutes.query(function() {  
+.controller('ListRoutesController',function($scope,GetActiveRoutes) {
+    $scope.routes = GetActiveRoutes.query(function() {  
       console.log($scope.routes);
   }); 
 }); 

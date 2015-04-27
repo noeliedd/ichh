@@ -9,44 +9,44 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 		})
 		.when('/home', {
 			templateUrl: 'views/home.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }    
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
 		})  
 		.when('/addUser', {
 			templateUrl: 'views/addUser.html',
 			controller: 'AddUserController',
-        resolve: {
-          loggedin: checkLoggedin
-        }
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }
     })
 		.when('/listUsers', {
 			templateUrl: 'views/listUsers.html',
 			controller: 'ListUsersController',
-        resolve: {
-          loggedin: checkLoggedin
-        }    
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
 		})  
 		.when('/addRoute', {
 			templateUrl: 'views/addRoute.html',
 			controller: 'AddRouteController',
-        resolve: {
-          loggedin: checkLoggedin
-        }     
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }     
 		})  
 		.when('/listRoutes', {
 			templateUrl: 'views/listRoutes.html',
 			controller: 'ListRoutesController',
-        resolve: {
-          loggedin: checkLoggedin
-        }    
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
 		})  
 		.when('/viewDrops', {
 			templateUrl: 'views/viewDrops.html',
 			controller: 'ViewDropsController',
-        resolve: {
-          loggedin: checkLoggedin
-        }    
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
 		})  
     .otherwise({
     redirectTo: '/'
