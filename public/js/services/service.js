@@ -52,7 +52,27 @@ angular.module('Service', [])
   };
   return GetRouteCoords;
 })
-//GetDrops
+
+.factory('GetRoute', function($http,RoutesDataService) {
+  console.log(" Routes A");
+  var GetRoute = {
+      getRoute: function(routeId) {
+          console.log("Routes B");
+          console.log(routeId);
+          var promise = $http.get('/api/getRoute?route_id='+routeId).then(function (response) {
+             console.log(response.data);
+             console.log("Route baby");  
+            for(var i =0; i< response.data.length;i++){
+              console.log(response.data[i]);
+            }
+             RoutesDataService.addList(response.data);
+             return response.data;
+          });
+          return promise;
+       }
+  };
+  return GetRoute;
+})
 .factory('GetDrops', function($http,DropsDataService) {
   console.log(" Debug Reached A");
   var GetDrops = {
@@ -73,11 +93,28 @@ angular.module('Service', [])
   };
   return GetDrops;
 })
-.service('DropsDataService', function() {
+.service('RoutesDataService', function() {
   var myList = [];
   var addList = function(newObj) {
       myList = [];
       console.log("Im Hereeeeeeeeeeeeeeeeeeeeeee");
+      console.log(newObj);
+      myList = newObj;
+  }
+  var getList = function(){
+      return myList;
+  }
+  return {
+    addList: addList,
+    getList: getList
+  };
+
+})
+.service('DropsDataService', function() {
+  var myList = [];
+  var addList = function(newObj) {
+      myList = [];
+      console.log("Im ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
       console.log(newObj);
       myList = newObj;
   }

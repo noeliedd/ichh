@@ -71,11 +71,12 @@ module.exports = function(app) {
 //-----------------Mobile REST API Calls---------------------------
   app.post("/api/loginUser", user.loginUser);  
   app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
-  app.get("/api/getRoute", route.getRoute);
+
   
 //-----------------Mobile & Web REST API Calls----------------------  
   app.get("/api/getActiveRoutes", route.getActiveRoutes);
-
+  app.get("/api/getRoute", route.getRoute);
+  
 // ---------------Angular frontend Website REST API--------------------
   app.post("/api/addUser", user.addUser);
   app.get('/api/getUsers', user.getUsers);
