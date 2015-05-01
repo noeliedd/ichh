@@ -1,6 +1,7 @@
 var Route = require('../models/route'); 
 //--------------------------Add Route-------------------------------------
 module.exports.addRoute = function(req,res){  
+  console.log(req.body);
   var route = new Route(req.body);  
   route.save(function (err, result) {  
       if(err){
@@ -12,7 +13,7 @@ module.exports.addRoute = function(req,res){
 }
 //--------------------Returns all active routes from db----------------------
 module.exports.getActiveRoutes = function(req,res){  
-  Route.find({ 'isActive': true },'-isActive -path', function (err, results) {
+  Route.find({ 'isActive': true },'-path', function (err, results) {
     res.json(results);   
     console.log(results); 
   });
@@ -33,4 +34,10 @@ module.exports.getRoute   = function(req,res){
       console.log(results); 
     });    
   } 
+}
+module.exports.getAllRoutes = function(req,res){  
+  Route.find({}, function (err, results) {
+    res.json(results);   
+    console.log(results); 
+  });
 }

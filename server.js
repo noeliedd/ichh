@@ -10,7 +10,8 @@ var express        = require('express'),
     passport       = require('passport'),
     LocalStrategy  = require('passport-local').Strategy,
     cookieParser   = require('cookie-parser'),  
-    session        = require('express-session');
+    session        = require('express-session')
+    nodemailer     = require("nodemailer");
 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +32,7 @@ var express        = require('express'),
   app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
   app.use(multer());
-  //app.use(logger('dev'));
+  app.use(logger('dev'));
 
 
   app.use(methodOverride('X-HTTP-Method-Override')); 

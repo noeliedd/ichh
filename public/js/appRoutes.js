@@ -9,9 +9,9 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 		})
 		.when('/home', {
 			templateUrl: 'views/home.html',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})  
 		.when('/addUser', {
 			templateUrl: 'views/addUser.html',
@@ -75,6 +75,7 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
 {
     var deferred = $q.defer();
     console.log("checked login A");
+    console.log($rootScope.currentUser);
     $http.get('/loggedin').success(function(user)
     {
         console.log("checked login B");

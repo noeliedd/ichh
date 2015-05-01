@@ -10,7 +10,6 @@ angular.module('UserCtrl', [])
           addUser.surname = $scope.surname;
           addUser.phoneNumber = $scope.phoneNumber;
           addUser.email = $scope.email;
-          addUser.password = $scope.password;
           addUser.admin = $scope.adminCheck;
           addUser.$save(function(response) {
             if(response.firstName){
@@ -24,14 +23,37 @@ angular.module('UserCtrl', [])
         $scope.firstName ="";
         $scope.surname ="";
         $scope.email ="";
-        $scope.password ="";
         $scope.phoneNumber ="";
         $scope.adminCheck = false;
-      };  
+      }
   }                                 
 ])
 .controller('ListUsersController',function($scope,GetUsers) {
     $scope.predicate = 'firstName';
-    $scope.users = GetUsers.query(function() {      
-  });  
-});
+    $scope.users = GetUsers.then(function(d){
+           $scope.users =d;
+    });  
+})
+.controller('EditUsersCtrl', function($scope,GetUsers,$http) {
+      GetUsers.then(function(d){
+           $scope.users =d;
+      });   
+      $scope.editUser = function(){
+        var user =$scope.selectedUser;
+        console.log(user);
+        $http.post('api/editUser', {_id:user._id, firstName:user.firstName, surname: user.surname,email: user.email,phoneNumber:user.phoneNumber, admin:user.admin }).
+          success(function(data, status, headers, config) {
+              console.log(data);
+              if(data==1){
+                alert("User Updated Successfully");
+              }else{
+                alert("User has not been updated");
+              }              
+          }).
+          error(function(data, status, headers, config) {
+              alert("An Error occurred please try again");
+            // or server returns response with an error status.
+        });
+      }
+    }           
+)

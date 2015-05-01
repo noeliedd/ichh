@@ -1,52 +1,96 @@
 <div class ="container">
   <div class="jumbotron">
-    <h3>Add User</h3>
-    <form ng-submit="addUser()" id ="addUserForm" class="form-horizontal">
-      <div class="form-group">
-        <label for="firstName" class="col-sm-4 control-label">First Name</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" ng-model="firstName" placeholder="First Name" required= true>
-        </div>
-      </div>   
-      <div class="form-group">
-        <label for="surname" class="col-sm-4 control-label">Surname</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" ng-model="surname" placeholder="Surname" required= true>
-        </div>
-      </div>  
-      <div class="form-group">
-        <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
-        <div class="col-sm-6">
-          <input type="tel" class="form-control" ng-model="phoneNumber" placeholder="Phone Number" required= true>
-        </div>
-      </div>       
-      <div class="form-group">
-        <label for="email" class="col-sm-4 control-label">Email</label>
-        <div class="col-sm-6">
-          <input type="email" class="form-control" ng-model="email" placeholder="Email" required= true>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="col-sm-4 control-label">Password</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" ng-model="password" placeholder="Password" required= true>
-        </div>
-      </div>      
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="adminCheck" ng-init="adminCheck=false"  ng-true-value="true" ng-false-value="false"> 
-                Admin User
-            </label>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Add/Edit User</h4>
+        <form ng-submit="addUser()" id ="userForm" class="form-horizontal">
+          <div class="form-group">
+            <label for="firstName" class="col-sm-4 control-label">First Name</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="firstName" placeholder="First Name" required= true>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label for="surname" class="col-sm-4 control-label">Surname</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="surname" placeholder="Surname" required= true>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
+            <div class="col-sm-6">
+              <input type="tel" class="form-control" ng-model="phoneNumber" placeholder="Phone Number" required= true>
+            </div>
+          </div>       
+          <div class="form-group">
+            <label for="email" class="col-sm-4 control-label">Email</label>
+            <div class="col-sm-6">
+              <input type="email" class="form-control" ng-model="email" placeholder="Email" required= true>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-8">
-          <button type="submit" class="btn btn-lg btn-primary center-block btn-block btn-signin">Add User</button>
-        </div>
-      </div>
-    </form>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="adminCheck" ng-init="adminCheck=false"  ng-true-value="true" ng-false-value="false"> 
+                    Admin User
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <button type="submit" class="btn btn-lg btn-primary center-block btn-block btn-signin">Add User</button>
+            </div>
+          </div>
+        </form>
+      </div>  
+      <div class="col-md-6" ng-controller="EditUsersCtrl">        
+        <form ng-submit="editUser()" id ="userForm" class="form-horizontal">   
+          <div class ="form-group">
+            <input placeholder="User Search.." style="width:70%; margin:auto" type="text" ng-model="selectedUser" typeahead="user as (user.firstName+' '+user.surname) for user in users | filter:$viewValue | limitTo:8" class="form-control">          
+          </div>
+          <div class="form-group">
+            <label for="firstName" class="col-sm-4 control-label">First Name</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedUser.firstName" placeholder="First Name" required= true>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label for="surname" class="col-sm-4 control-label">Surname</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedUser.surname" placeholder="Surname" required= true>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
+            <div class="col-sm-6">
+              <input type="tel" class="form-control" ng-model="selectedUser.phoneNumber" placeholder="Phone Number" required= true>
+            </div>
+          </div>       
+          <div class="form-group">
+            <label for="email" class="col-sm-4 control-label">Email</label>
+            <div class="col-sm-6">
+              <input type="email" class="form-control" ng-model="selectedUser.email" placeholder="Email" required= true>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="selectedUser.admin" ng-checked="selectedUser.admin"> 
+                    Admin User
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <button type="submit" class="btn btn-lg btn-primary center-block btn-block btn-signin">Edit User</button>
+            </div>
+          </div>      
+        </form>  
+       </div> 
+     </div> 
   </div>
 </div>

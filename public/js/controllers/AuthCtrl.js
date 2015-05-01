@@ -1,6 +1,6 @@
 angular.module('AuthCtrl',[])
-
-.controller('LoginCtrl',function($scope,$http,$location,AuthLoginService) {
+  
+.controller('LoginCtrl',function($scope,$rootScope,$http,$location,AuthLoginService) {
     $scope.login = function(user) {  
       console.log(user);
       AuthLoginService.login(user,function(returnedUser){

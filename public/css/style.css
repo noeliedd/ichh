@@ -27,8 +27,8 @@ body {
 #queryDropsBtn{
   width:90%;
 }
-#addUserForm{
-  width:55%;
+#userForm{
+  width:100%;
   margin: 0 auto;
 }
 body, html {
@@ -36,7 +36,6 @@ body, html {
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(153, 178, 204), rgb(214, 224, 235));
 }
-
 .card-container.card {
     border-radius: 10px;
     width: 350px;

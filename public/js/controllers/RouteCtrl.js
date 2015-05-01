@@ -1,4 +1,4 @@
-angular.module('AddRouteCtrl', [])
+angular.module('RouteCtrl', [])
 
 .controller('AddRouteController',['$scope','$resource', function($scope, $resource) {
     var marker, path, length, coords, map, poly;
@@ -108,3 +108,9 @@ angular.module('AddRouteCtrl', [])
     }
   }                                  
 ])
+.controller('ListRoutesController',function($scope,GetAllRoutes) {
+    //$scope.predicate = 'firstName';
+    $scope.routes = GetAllRoutes.then(function(d){
+           $scope.routes =d;
+    });  
+})
