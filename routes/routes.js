@@ -79,8 +79,8 @@ module.exports = function(app) {
 //-----------------Mobile REST API Calls---------------------------
   //app.post("/api/loginUser", user.loginUser);  
   app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
+  app.get("/api/getPassword", user.getPassword);
 
-  
 //-----------------Mobile & Web REST API Calls----------------------  
   app.get("/api/getActiveRoutes", route.getActiveRoutes);
   app.get("/api/getRoute", route.getRoute);

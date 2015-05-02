@@ -33,15 +33,14 @@ module.exports.addUser = function(req,res){
 module.exports.editUser = function(req,res){ 
   console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
   console.log(req.body);
-  User.update({_id:req.body._id}, {$set: { firstName: req.body.firstName, surname: req.body.surname, phoneNumber: req.body.phoneNumber, email: req.body.email, admin: req.body.admin }}, function(err,result){
+  User.update({_id:req.body._id}, {$set: { firstName: req.body.firstName, surname: req.body.surname, phoneNumber: req.body.phoneNumber, email: req.body.email, admin: req.body.admin }}, function(err,results){
       if(err){
          res.json(err);  
       }else{
-          console.log(result);
-         res.json(result);
+          console.log(results);
+         res.json(results);
       } 
   });
-
 }
 //--------------------------------------------------------------------------------
 module.exports.getUsers = function(req,res){  
@@ -50,6 +49,38 @@ module.exports.getUsers = function(req,res){
     console.log(results); 
   });
 }
+module.exports.getPassword = function(req,res){ 
+  console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+    console.log(req.query.email)
+  User.findOne({email: req.query.email},function (err, results) {
+      if(err){
+         console.log(err);
+         res.json(err);  
+      }else{
+        if(results){
+            var mailOptions = {
+                from: 'ichhhomelesshelper@gmail.com', // sender address 
+                to: results.email, // list of receivers 
+                subject: 'Password Reminder', // Subject line 
+                text: 'Hello '+results.firstName+' your password is : '+results.password     
+            };     
+            transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                    console.log(error);
+                }else{
+                    console.log('Message sent: ' + info.response);
+                }
+            }); 
+            console.log(results);
+            res.send("Successful");
+        }else{
+            res.send("Email not found");
+        }                
+      } 
+  });  
+}
+
+
 //--------------------------Ionic mobile login API----------------------------------
 // module.exports.loginUser = function(req,res){
 //   console.log(req.body);

@@ -1,29 +1,29 @@
 <div class ="container">
   <div class="jumbotron">
     <h3>List Routes</h3>     
-<div class="table-responsive">
-  <table class="table table-striped table-bordered" >
-    <tr>
-               <div class ="form-group">
-            <input placeholder="User Search.." style="width:70%; margin:auto" type="text" ng-model="selectedUser" typeahead="user as (user.firstName+' '+user.surname) for user in users | filter:$viewValue | limitTo:8" class="form-control">          
-          </div>
-      <th><a href="" ng-click="predicate='-name'; reverse=!reverse">Name</a></th>
-      <th><a href="" ng-click="predicate='-routeBeginning'; reverse=!reverse">Begins</a></th>
-      <th><a href="" ng-click="predicate='-routeEnding'; reverse=!reverse">Ends</a></th>
-      <th>Distance</th>
-      <th>Description</th>      
-      <th><a href="" ng-click="predicate='-isActive'; reverse=!reverse">Active</a></th>
-      <th><a href="" ng-click="predicate='-dateCreated'; reverse=!reverse">Creation Date</a></th>
-
-    </tr>
-    <tr ng-repeat="route in routes | orderBy:predicate:reverse">
-      <td>{{route.name}}</td>
-      <td>{{route.routeBeginning}}</td>      
-      <td>{{route.routeEnding}}</td>
-      <td>{{route.distance}}</td>
-      <td>{{route.description}}</td>
-      <td>{{route.isActive}}</td>
-      <td>{{route.dateCreated | date:'dd/MM/yyyy'}}</td>
-  </tr>
-  </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered"  id="searchTextResults">
+          <tr>
+          <div class ="form-group">
+            <input placeholder="Route Search.." style="width:70%; margin:auto" type="text" ng-model="searchText" class="form-control">          
+          </div>        
+              <th><a href="" ng-click="predicate='-name'; reverse=!reverse">Name</a></th>
+              <th><a href="" ng-click="predicate='-routeBeginning'; reverse=!reverse">Begins</a></th>
+              <th><a href="" ng-click="predicate='-routeEnding'; reverse=!reverse">Ends</a></th>
+              <th>Distance</th>
+              <th>Description</th>      
+              <th><a href="" ng-click="predicate='-isActive'; reverse=!reverse">Active</a></th>
+              <th><a href="" ng-click="predicate='-dateCreated'; reverse=!reverse">Creation Date</a></th>
+          
+          <tr ng-repeat="route in routes | filter:searchText | orderBy:predicate:reverse">
+              <td>{{route.name}}</td>
+              <td>{{route.routeBeginning}}</td>      
+              <td>{{route.routeEnding}}</td>
+              <td>{{route.distance}}</td>
+              <td>{{route.description}}</td>
+              <td>{{route.isActive}}</td>
+              <td>{{route.dateCreated | date:'dd/MM/yyyy'}}</td>
+          </tr>
+     </table>
+  </div>    
 </div>

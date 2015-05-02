@@ -30,6 +30,16 @@ angular.module('Service', [])
       });
       return promise;
 })
+.factory('PasswordReminderService', function($http){ 
+  return{     
+    getPassword: function(email){      
+      $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getPassword?email='+email)
+        .success(function(response){  
+            console.log(response);
+      })
+    } 
+  };
+})
 .factory('GetAllRoutes', function($http) {
       var promise = $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getAllRoutes').then(function (response) {
          console.log(response);

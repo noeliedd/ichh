@@ -8,4 +8,24 @@ angular.module('AuthCtrl',[])
         $location.url("/home")
       })
   }; 
+})
+.controller('ModalCtrl', function ($scope, $modal) {
+  $scope.open = function (size) {
+    var modalInstance = $modal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      size: size,
+      resolve: {        
+      }
+    });
+  };
+})
+.controller('ModalInstanceCtrl', function ($scope, $modalInstance,PasswordReminderService) {
+  $scope.submit = function () {
+    PasswordReminderService.getPassword($scope.email);
+    $modalInstance.close($scope.selected);
+  };
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
 });

@@ -46,6 +46,7 @@ angular.module('RouteCtrl', [])
     function addLatLng(event) {
       var coord = event.latLng;
       coordsArray.push(coord);
+      console.log(coordsArray);
       path = poly.getPath();
       path.push(event.latLng);
     //Get length of path
@@ -109,7 +110,6 @@ angular.module('RouteCtrl', [])
   }                                  
 ])
 .controller('ListRoutesController',function($scope,GetAllRoutes) {
-    //$scope.predicate = 'firstName';
     $scope.routes = GetAllRoutes.then(function(d){
            $scope.routes =d;
     });  

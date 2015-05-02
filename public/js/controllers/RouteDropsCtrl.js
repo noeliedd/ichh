@@ -52,7 +52,7 @@ angular.module('RouteDropsCtrl', [])
         setAllMap(null);
         markerArray=[];
         for(var i =0; i<dropCoordinates.length;i++){
-            var latLng = new google.maps.LatLng(dropCoordinates[i].k,dropCoordinates[i].D);
+            var latLng = new google.maps.LatLng(dropCoordinates[i].A,dropCoordinates[i].F);
             marker = new google.maps.Marker({position: latLng,map: map});     
             oms.addMarker(marker);
             markerArray.push(marker);
