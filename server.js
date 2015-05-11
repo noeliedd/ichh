@@ -37,7 +37,9 @@ var express        = require('express'),
 
   app.use(methodOverride('X-HTTP-Method-Override')); 
   app.use(express.static(__dirname + '/public')); // set the static files location 
-  app.use('/libs',express.static(__dirname + '/libs'));
+   var path = require('path');
+  app.use('/js',express.static(path.join(__dirname, 'public/js')));
+  app.use('/libs',express.static(path.join(__dirname, 'public/libs')));
   //app.use(express.static(process.cwd('/public')));
   
   // routes ==================================================
