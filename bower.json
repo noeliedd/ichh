@@ -4,8 +4,8 @@
   "dependencies": {
     "bootstrap": "latest",
     "angular": "1.2.10",
-    "angular-route": "latest",
-    "angular-resource": "latest",
+    "angular-route": "1.2.10",
+    "angular-resource": "1.2.10",
     "angular-bootstrap": "~0.12.1"
   }
 }
