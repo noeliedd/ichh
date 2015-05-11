@@ -13,6 +13,7 @@ var express        = require('express'),
     session        = require('express-session')
     nodemailer     = require("nodemailer");
 
+  app.use(express.static(__dirname + '/public')); // set the static files location 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -36,7 +37,7 @@ var express        = require('express'),
 
 
   app.use(methodOverride('X-HTTP-Method-Override')); 
-  app.use(express.static(__dirname + './public')); // set the static files location 
+
   //app.use(express.static(process.cwd('/public')));
   
   // routes ==================================================
