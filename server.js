@@ -17,7 +17,7 @@ var path = require('path');
   app.use(express.static(path.join(process.env.PWD, 'public'))); // set the static files location
 
   app.use(function (req, res, next) {
-      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
       res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
       res.setHeader('Access-Control-Allow-Credentials', true);
