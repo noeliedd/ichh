@@ -12,18 +12,9 @@ var express        = require('express'),
     cookieParser   = require('cookie-parser'),  
     session        = require('express-session')
     nodemailer     = require("nodemailer");
+  
 var path = require('path');
-  app.use(express.static(path.join(process.env.PWD, 'public')));
-  app.use(express.static(path.join(process.env.PWD, 'public/js')));
-  app.use(express.static(path.join(process.env.PWD, 'public/js/controllers')));
-  app.use(express.static(path.join(process.env.PWD, 'public/js/services')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/angular')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/angular-bootstrap')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/angular-resource')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/angular-route')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/bootstrap/dist/js')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/jquery/dist/js')));// set the static files location
+  app.use(express.static(path.join(process.env.PWD, 'public'))); // set the static files location
 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');

@@ -57,17 +57,10 @@ angular.module('Service', [])
 })
 
 .factory('GetRoute', function($http,RoutesDataService) {
-  console.log(" Routes A");
   var GetRoute = {
-      getRoute: function(routeId) {
-          console.log("Routes B");
-          console.log(routeId);
-          var promise = $http.get('/api/getRoute?route_id='+routeId).then(function (response) {
-             console.log(response.data);
-             console.log("Route baby");  
-            for(var i =0; i< response.data.length;i++){
-              console.log(response.data[i]);
-            }
+      getRoute: function(routeId) { 
+          var promise = $http.get('/api/getRoute?route_id='+routeId)
+          .then(function (response) {
              RoutesDataService.addList(response.data);
              return response.data;
           });
@@ -78,18 +71,11 @@ angular.module('Service', [])
 })
 
 .factory('GetDrops', function($http,DropsDataService) {
-  console.log(" Debug Reached A");
   var GetDrops = {
       getDrops: function(fromDate, toDate,routeId) {
-          console.log("Reached B");
-          console.log(fromDate,toDate,routeId);
-          var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId).then(function (response) {
-             console.log(response.data);
-             console.log("Hello baby");  
-            for(var i =0; i< response.data.length;i++){
-              console.log(response.data[i]);
-            }
-             DropsDataService.addList(response.data);
+          var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId)
+          .then(function (response) {
+               DropsDataService.addList(response.data);
              return response.data;
           });
           return promise;
@@ -118,8 +104,6 @@ angular.module('Service', [])
   var myList = [];
   var addList = function(newObj) {
       myList = [];
-      console.log("Im ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-      console.log(newObj);
       myList = newObj;
   }
   var getList = function(){
@@ -129,5 +113,4 @@ angular.module('Service', [])
     addList: addList,
     getList: getList
   };
-
 });

@@ -1,7 +1,6 @@
 var Route = require('../models/route'); 
 //--------------------------Add Route-------------------------------------
 module.exports.addRoute = function(req,res){  
-  console.log(req.body);
   var route = new Route(req.body);  
   route.save(function (err, result) {  
       if(err){
