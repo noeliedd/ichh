@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "bash ./post_install.sh"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "engines": {
     "node": "0.10.26",
