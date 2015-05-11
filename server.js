@@ -14,10 +14,11 @@ var express        = require('express'),
     nodemailer     = require("nodemailer");
 var path = require('path');
   app.use(express.static(path.join(process.env.PWD, 'public')));
+  app.use(express.static(path.join(process.env.PWD, 'public/js')));
+  app.use(express.static(path.join(process.env.PWD, 'public/js/controllers')));
+  app.use(express.static(path.join(process.env.PWD, 'public/js/services')));
   app.use(express.static(path.join(process.env.PWD, 'public/libs')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/controllers')));
-  app.use(express.static(path.join(process.env.PWD, 'public/libs/services')));
-  app.use(express.static(path.join(process.env.PWD, 'public/js')));// set the static files location
+  app.use(express.static(path.join(process.env.PWD, 'public/libs/angular')));// set the static files location
 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
