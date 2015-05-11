@@ -37,7 +37,8 @@ var express        = require('express'),
 
   app.use(methodOverride('X-HTTP-Method-Override')); 
   app.use(express.static(__dirname + '/public')); // set the static files location 
-
+  app.use('/libs',express.static(__dirname + '/libs'));
+  //app.use(express.static(process.cwd('/public')));
   
   // routes ==================================================
     require('./routes/routes')(app); // pass our application into our routes
