@@ -24,7 +24,7 @@ angular.module('Service', [])
   };
 })
 .factory('GetUsers', function($http) {
-      var promise = $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getUsers').then(function (response) {
+      var promise = $http.get('/api/getUsers').then(function (response) {
          console.log(response);
         return response.data;
       });
@@ -33,7 +33,7 @@ angular.module('Service', [])
 .factory('PasswordReminderService', function($http){ 
   return{     
     getPassword: function(email){      
-      $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getPassword?email='+email)
+      $http.get('/api/getPassword?email='+email)
         .success(function(response){  
             console.log(response);
       })
@@ -41,7 +41,7 @@ angular.module('Service', [])
   };
 })
 .factory('GetAllRoutes', function($http) {
-      var promise = $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getAllRoutes').then(function (response) {
+      var promise = $http.get('/api/getAllRoutes').then(function (response) {
          console.log(response);
         return response.data;
       });
@@ -49,7 +49,7 @@ angular.module('Service', [])
 })
 
 .factory('GetActiveRoutes', function($http) {
-      var promise = $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getActiveRoutes').then(function (response) {
+      var promise = $http.get('/api/getActiveRoutes').then(function (response) {
          console.log(response);
         return response.data;
       });
