@@ -13,7 +13,6 @@ var express        = require('express'),
     session        = require('express-session')
     nodemailer     = require("nodemailer");
 
-  app.use(express.static(__dirname + '/public')); // set the static files location 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -27,7 +26,7 @@ var express        = require('express'),
   var port = process.env.PORT || 3000; // set our port
 
   // get all data/stuff of the body (POST) parameters
-
+  app.use(express.static(__dirname + '/public')); // set the static files location 
   app.use(bodyParser.json()); // parse application/json 
   app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
   app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
