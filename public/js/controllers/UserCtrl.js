@@ -1,4 +1,4 @@
-var app = angular.module('UserCtrl', [])
+var app =angular.module('UserCtrl', [])
 
 .controller('AddUserController',['$scope','$resource','$rootScope', function($scope, $resource,$rootScope) {
     console.log("hear I am");
