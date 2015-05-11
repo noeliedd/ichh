@@ -13,7 +13,9 @@ var express        = require('express'),
     session        = require('express-session')
     nodemailer     = require("nodemailer");
 var path = require('path');
-  app.use(express.static(path.join(process.env.PWD, 'public'))); // set the static files location
+  app.use(express.static(path.join(process.env.PWD, 'public')));
+  app.use(express.static(path.join(process.env.PWD, 'public/libs')));
+  app.use(express.static(path.join(process.env.PWD, 'public/js')));// set the static files location
 
   app.use(function (req, res, next) {
       res.setHeader('Access-Control-Allow-Origin', '*');
