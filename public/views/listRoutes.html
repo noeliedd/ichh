@@ -5,7 +5,18 @@
       <table class="table table-striped table-bordered"  id="searchTextResults">
           <tr>
           <div class ="form-group">
-            <input placeholder="Route Search.." style="width:70%; margin:auto" type="text" ng-model="searchText" class="form-control">          
+            <hr>
+            <label for="routesFilter" class="col-sm-4 control-label">Route Search:</label> 
+            <div class="col-sm-6"> 
+              <input placeholder="Route Search.." style="margin:auto" type="text" ng-model="searchText" class="form-control">     
+            </div>  
+          </div>            
+          <div class ="form-group">
+            <label for="activeRoutesFilter" class="col-sm-4 control-label">Only Active Routes:</label>  
+            <div class="col-sm-6">              
+              <input type="checkbox" data-ng-model='search.isActive' data-ng-true-value='true' data-ng-false-value='false' />   
+              <hr>
+            </div>             
           </div>        
               <th><a href="" ng-click="predicate='-name'; reverse=!reverse">Name</a></th>
               <th><a href="" ng-click="predicate='-routeBeginning'; reverse=!reverse">Begins</a></th>
@@ -15,7 +26,7 @@
               <th><a href="" ng-click="predicate='-isActive'; reverse=!reverse">Active</a></th>
               <th><a href="" ng-click="predicate='-dateCreated'; reverse=!reverse">Creation Date</a></th>
           
-          <tr ng-repeat="route in routes | filter:searchText | orderBy:predicate:reverse">
+          <tr ng-repeat="route in routes | filter:searchText |filter:search.isActive| orderBy:predicate:reverse">
               <td>{{route.name}}</td>
               <td>{{route.routeBeginning}}</td>      
               <td>{{route.routeEnding}}</td>

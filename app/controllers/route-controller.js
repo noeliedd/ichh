@@ -11,6 +11,18 @@ module.exports.addRoute = function(req,res){
       }      
   });
 }
+module.exports.editRoute = function(req,res){ 
+  console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+  console.log(req.body);
+  Route.update({_id:req.body._id}, {$set: { name: req.body.name, routeBeginning: req.body.routeBeginning, routeEnding: req.body.routeEnding, description: req.body.description, isActive: req.body.isActive }}, function(err,results){
+      if(err){
+         res.json(err);  
+      }else{
+          console.log(results);
+         res.json(results);
+      } 
+  });
+}
 //--------------------Returns all active routes from db----------------------
 module.exports.getActiveRoutes = function(req,res){  
   Route.find({ 'isActive': true },'-path', function (err, results) {

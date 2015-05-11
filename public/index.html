@@ -23,6 +23,7 @@
 	<script src="js/controllers/UserCtrl.js"></script>
 	<script src="js/controllers/RouteCtrl.js"></script>
  	<script src="js/controllers/RouteDropsCtrl.js"></script>
+ 	<script src="js/controllers/RouteOrdersCtrl.js"></script>  
 	<script src="js/controllers/AuthCtrl.js"></script>  
 	<script src="js/controllers/NavBarCtrl.js"></script>   
 	<script src="js/services/service.js"></script> 
@@ -53,8 +54,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="/addUser">Add/Edit User</a></li>
-                <li><a href="/listUsers">View Users</a></li>
+                <li><a href="/addEditUser">Add/Edit User</a></li>
+                <li><a href="/listUsers">List Users</a></li>
                 <li class="divider"></li>
                 <li><a href="/" ng-show="!currentUser">Login</a></li>
                 <li><a href="/" ng-click="logout()" ng-show="currentUser">Logout</a></li>
@@ -66,11 +67,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Route Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="/addRoute">Add Route</a></li>
-                <li><a href="/listRoutes">View Routes</a></li>
+                <li><a href="/addRoute">Add Route</a></li>                
+                <li><a href="/editRoute">Edit Route</a></li>
+                <li class="divider"></li>
+                <li><a href="/listRoutes">List Routes</a></li>
                 <li><a href="/viewDrops">View Drops</a></li>
                 <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="/viewOrders">View Orders</a></li>
               </ul>
             </li>
           </ul>      

@@ -13,8 +13,8 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
           loggedin: checkLoggedin
         }    
 		})  
-		.when('/addUser', {
-			templateUrl: 'views/addUser.html',
+		.when('/addEditUser', {
+			templateUrl: 'views/addEditUser.html',
 			controller: 'AddUserController',
 //         resolve: {
 //           loggedin: checkLoggedin
@@ -41,6 +41,13 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 //           loggedin: checkLoggedin
 //         }    
 		})  
+		.when('/editRoute', {
+			templateUrl: 'views/editRoute.html',
+			controller: 'EditRouteController',
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
+		})    
 		.when('/viewDrops', {
 			templateUrl: 'views/viewDrops.html',
 			controller: 'ViewDropsController',
@@ -48,6 +55,13 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 //           loggedin: checkLoggedin
 //         }    
 		})  
+		.when('/viewOrders', {
+			templateUrl: 'views/viewOrders.html',
+			controller: 'ViewOrdersController',
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
+		})   
     .otherwise({
     redirectTo: '/'
     });

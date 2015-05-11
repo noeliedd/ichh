@@ -1,7 +1,12 @@
 {
   "name": "ichh",
+  "description": "ICHH Homeless Helper App",
+  "author": "Noel Devitt",
   "version": "0.0.1",
   "main": "server.js",
+  "scripts": {
+  "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.11.1",
     "body-parser": "^1.10.2",

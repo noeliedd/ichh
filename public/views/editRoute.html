@@ -1,0 +1,63 @@
+<div class ="container">
+  <div class="jumbotron">
+    <div class="row">
+        <h4>Edit Route</h4>
+      <div class="col-md-12" ng-controller="EditRouteController">        
+        <form ng-submit="editRoute()" id ="routeForm" class="form-horizontal">   
+          <div class ="form-group">
+            <label for="activeRoutesFilter" class="col-sm-4 control-label">Route Search</label> 
+            <div class="col-sm-6"> 
+              <input placeholder="Route Search.." style=" margin:auto" type="text" ng-model="selectedRoute" typeahead="route as route.name for route in routes | filter:$viewValue |filter:search.isActive| limitTo:8" class="form-control">   
+            </div>  
+          </div>
+          <div class ="form-group">
+            <label for="activeRoutesFilter" class="col-sm-4 control-label">Only Active Routes</label>  
+            <div class="col-sm-6">              
+              <input type="checkbox" data-ng-model='search.isActive' data-ng-true-value='true' data-ng-false-value='false' />   
+              <hr>
+            </div>             
+          </div> 
+          <div class="form-group">
+            <label for="Name" class="col-sm-4 control-label">Name</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedRoute.name" placeholder="Name" required= true>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label for="routeBeginning" class="col-sm-4 control-label">Begins</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedRoute.routeBeginning" placeholder="Begins" required= true>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label for="routeEnding" class="col-sm-4 control-label">Ends</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedRoute.routeEnding" placeholder="Ends" required= true>
+            </div>
+          </div>       
+          <div class="form-group">
+            <label for="description" class="col-sm-4 control-label">Description</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ng-model="selectedRoute.description" placeholder="Description" required= true>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="selectedRoute.isActive" ng-checked="selectedRouye.isActive"> 
+                    Is Active
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+              <button type="submit" class="btn btn-lg btn-primary center-block btn-block btn-signin">Edit Route</button>
+            </div>
+          </div>      
+        </form>  
+       </div> 
+     </div> 
+  </div>
+</div>

@@ -2,6 +2,7 @@ module.exports = function(app) {
    var  user           = require('../app/controllers/user-controller.js'),
         route          = require('../app/controllers/route-controller.js'),
         routeDrop      = require('../app/controllers/routeDrop-controller.js'),
+        routeOrder     = require('../app/controllers/routeOrder-controller.js'),       
         express        = require("express"),
         passport       = require('passport'),
         cookieParser   = require('cookie-parser'),  
@@ -27,10 +28,10 @@ module.exports = function(app) {
       }
  
       else if (!user.length) {
-        console.log("no fucking user");
+        console.log("Ther is no user found");
         return done(null, false);
       }else{
-         console.log("user.name");
+        console.log("user.name");
         console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         console.log(user);
         return done(null, user);     
@@ -77,18 +78,20 @@ module.exports = function(app) {
 
 //--------------------server routes -------------------------------
 //-----------------Mobile REST API Calls---------------------------
-  //app.post("/api/loginUser", user.loginUser);  
   app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
-  app.get("/api/getPassword", user.getPassword);
+  app.post("/api/addRouteOrder", routeOrder.addRouteOrder);
 
 //-----------------Mobile & Web REST API Calls----------------------  
   app.get("/api/getActiveRoutes", route.getActiveRoutes);
   app.get("/api/getRoute", route.getRoute);
-  app.post("/api/editUser", user.editUser);
+  app.get("/api/getPassword", user.getPassword);
+  
 // ---------------Angular frontend Website REST API--------------------
   app.post("/api/addUser", user.addUser);
+  app.post("/api/editUser", user.editUser);  
   app.get('/api/getUsers', user.getUsers);
   app.post("/api/addRoute", route.addRoute);
+  app.post("/api/editRoute", route.editRoute);
   app.get("/api/getAllRoutes", route.getAllRoutes);
   app.get("/api/getRouteDrop", routeDrop.getRouteDrop);
 

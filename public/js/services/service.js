@@ -47,10 +47,7 @@ angular.module('Service', [])
       });
       return promise;
 })
-//Retrieves all users from server using ngResource
-// .factory('GetUsers', function($resource) {
-//     return $resource('/api/getUsers');
-// })
+
 .factory('GetActiveRoutes', function($http) {
       var promise = $http.get('http://ichh-202592.euw1-2.nitrousbox.com/api/getActiveRoutes').then(function (response) {
          console.log(response);
@@ -58,24 +55,6 @@ angular.module('Service', [])
       });
       return promise;
 })
-// .factory('GetRouteCoords', function($http,DropsDataService) {
-//   var GetRouteCoords = {
-//       getRouteCoord: function(id) {
-//           console.log(id);
-//           var promise = $http.get('/api/getRouteCoord?-id='+id).then(function (response) {
-//              console.log(response.data);
-//              console.log("Hello baby");  
-//             for(var i =0; i< response.data.length;i++){
-//               console.log(response.data[i]);
-//             }
-//              shareDataService.addList(response.data);
-//              return response.data;
-//           });
-//           return promise;
-//        }
-//   };
-//   return GetRouteCoords;
-// })
 
 .factory('GetRoute', function($http,RoutesDataService) {
   console.log(" Routes A");
@@ -97,6 +76,7 @@ angular.module('Service', [])
   };
   return GetRoute;
 })
+
 .factory('GetDrops', function($http,DropsDataService) {
   console.log(" Debug Reached A");
   var GetDrops = {

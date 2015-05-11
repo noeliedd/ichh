@@ -4,15 +4,22 @@ angular.module('RouteDropsCtrl', [])
 // Watches a shared data service, updates an array everytime the shared service changes and applies the markers and routes to the map
 .controller('ViewDropsController', function($scope,DropsDataService,RoutesDataService) {
      var dropCoordinates =[];
+     var dropDetails =[];
      var routeCoordinates =[];
      var polylines=[]; //Used to store polylines objects in order to clear the map 
+     $scope.totalMet = 0;
+     $scope.totalFed = 0;
+     $scope.totalClothed = 0;
+  
      $scope.$watch(function () {
          return DropsDataService.getList();
      },                  
       function(newVal, oldVal) {
           dropCoordinates =[];
+          dropDetails =[];
           for(var i =0; i<newVal.length;i++){
-              dropCoordinates.push(newVal[i].coordinates[0]);
+              dropCoordinates.push(newVal[i]);
+              dropDetails.push(newVal[i].totalMale + newVal[i].totalFemale);
           }       
           addMarkers();
       }, true);
@@ -42,22 +49,42 @@ angular.module('RouteDropsCtrl', [])
         var mapOptions = {zoom: 12,center: coords,mapTypeId: google.maps.MapTypeId.ROADMAP};
         map = new google.maps.Map(document.getElementById('dropsMap'), mapOptions);
         iw = new googleMap.InfoWindow();
-        oms = new OverlappingMarkerSpiderfier(map);      
+        oms = new OverlappingMarkerSpiderfier(map,{keepSpiderfied : true});      
  
         var image = 'img/homePin.png';
         marker = new google.maps.Marker({map: map,position: coords,icon: image});     
     }
     function addMarkers(){ 
+        $scope.totalMet = 0;
+        $scope.totalFed = 0;
+        $scope.totalClothed = 0;
+      
         oms.clearMarkers();
         setAllMap(null);
         markerArray=[];
         for(var i =0; i<dropCoordinates.length;i++){
-            var latLng = new google.maps.LatLng(dropCoordinates[i].A,dropCoordinates[i].F);
-            marker = new google.maps.Marker({position: latLng,map: map});     
+            var latLng = new google.maps.LatLng(dropCoordinates[i].coordinates[0].A,dropCoordinates[i].coordinates[0].F);
+            var totalMet = dropCoordinates[i].totalMale + dropCoordinates[i].totalFemale;
+            var fed = dropCoordinates[i].totalMaleFed + dropCoordinates[i].totalFemaleFed;
+            var clothed = dropCoordinates[i].totalMaleClothed + dropCoordinates[i].totalFemaleClothed;
+            $scope.totalMet = $scope.totalMet + totalMet;
+            $scope.totalFed = $scope.totalFed + fed;
+            $scope.totalClothed = $scope.totalClothed + clothed;
+            marker = new google.maps.Marker({position: latLng,map: map,});     
             oms.addMarker(marker);
             markerArray.push(marker);
+            marker.desc = '<b>Total Met: ' +totalMet.toString()+'<br />Fed: '+fed.toString()+'<br />Clothed: '+
+              clothed.toString()+'</b>';
+            console.log(dropCoordinates);
         }    
     }
+//Global event Listener added to oms instance  
+        iw = new googleMap.InfoWindow();
+        oms.addListener('click', function(marker, event) {
+        iw.setContent(marker.desc);
+        iw.open(map, marker);
+      });
+
     function setAllMap(map) {
         for (var i = 0; i < markerArray.length; i++) {
             markerArray[i].setMap(map);
@@ -89,9 +116,9 @@ angular.module('RouteDropsCtrl', [])
             }  
           console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
           console.log(routes[0]);
-//------Each path coordinate converted to google LatLng object and pushed to array named route.
-//------GoogleMap polyline object is created with its path set to the routes array
-//------Each polyline object is then pushed to an array polylines. This is used to track the polylines on the map in order to clear later
+          //------Each path coordinate converted to google LatLng object and pushed to array named route.
+          //------GoogleMap polyline object is created with its path set to the routes array
+          //------Each polyline object is then pushed to an array polylines. This is used to track the polylines on the map in order to clear later
             arrowSymbol = {path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,strokeColor: '#FF0000',strokeOpacity: 1.0};
             poly = new google.maps.Polyline({path: routes,strokeColor: '#FF0000',strokeOpacity: 1.0,strokeWeight: 2,icons: [{                      
               icon: arrowSymbol,

@@ -17,7 +17,7 @@ module.exports.addUser = function(req,res){
             from: 'ichhhomelesshelper@gmail.com', // sender address 
             to: user.email, // list of receivers 
             subject: 'Your new password', // Subject line 
-            text: 'Hello '+user.firstName+' have been registered with ICHH, your password is: '+user.password     
+            text: 'Hello '+user.firstName+', you have been registered with ICHH, your password is: '+user.password     
         };     
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
@@ -49,6 +49,7 @@ module.exports.getUsers = function(req,res){
     console.log(results); 
   });
 }
+
 module.exports.getPassword = function(req,res){ 
   console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
     console.log(req.query.email)
@@ -80,22 +81,4 @@ module.exports.getPassword = function(req,res){
   });  
 }
 
-
-//--------------------------Ionic mobile login API----------------------------------
-// module.exports.loginUser = function(req,res){
-//   console.log(req.body);
-//   User.find({email:req.body.email,password:req.body.password},function(err, user){
-//    if(err){
-//      res.send(err);
-//    }else{
-//       if(!user.length){
-//         console.log("it doesnt exist");
-//         res.send("Invalid Username or password");
-//       }else{
-//         console.log("Its in the database");    
-//         res.send("valid");
-//       }
-//    }
-//   })
-// }
 //--------------------------------------------------------------------------------

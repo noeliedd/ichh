@@ -1,6 +1,6 @@
 angular.module('RouteCtrl', [])
 
-.controller('AddRouteController',['$scope','$resource', function($scope, $resource) {
+.controller('AddRouteController',['$scope','$resource',"GetActiveRoutes", function($scope, $resource,GetActiveRoutes) {
     var marker, path, length, coords, map, poly;
     var coordsArray = [];//used to save coordinates to db
     var markerArray =[]; //used to clear map markers
@@ -8,7 +8,8 @@ angular.module('RouteCtrl', [])
     initialize();
 
     function initialize() {
-        var mapOptions = {zoom: 12,center: coords,mapTypeId: google.maps.MapTypeId.ROADMAP};
+      var styles = [{featureType: 'poi.business',elementType: 'labels',	stylers: [{ visibility: 'off' }]},{ 	draggable: false }];
+        var mapOptions = {zoom: 12,center: coords,mapTypeId: google.maps.MapTypeId.ROADMAP,styles: styles};
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         var image = 'img/homePin.png';
         marker = new google.maps.Marker({map: map,position: coords,icon: image});    
@@ -114,3 +115,26 @@ angular.module('RouteCtrl', [])
            $scope.routes =d;
     });  
 })
+.controller('EditRouteController', function($scope,GetAllRoutes,$http) {
+      GetAllRoutes.then(function(d){
+           $scope.routes =d;
+      });   
+      $scope.editRoute = function(){
+        var route =$scope.selectedRoute;
+        console.log(route);
+        $http.post('api/editRoute', {_id:route._id, name:route.name, routeBeginning: route.routeBeginning,routeEnding: route.routeEnding, description:route.description, isActive:route.isActive }).
+          success(function(data, status, headers, config) {
+              console.log(data);
+              if(data==1){
+                alert("Route Updated Successfully");
+              }else{
+                alert("Route has not been updated");
+              }              
+          }).
+          error(function(data, status, headers, config) {
+              alert("An Error occurred please try again");
+            // or server returns response with an error status.
+        });
+      }
+    }           
+)

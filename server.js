@@ -44,5 +44,5 @@ var express        = require('express'),
 
   // start app ===============================================
     app.listen(port);	
-    console.log('Magic happens on port ' + port); 			// shoutout to the user
-    exports = module.exports = app; 						// expose app
+    console.log('This is the port Number ' + port);
+    exports = module.exports = app;	// expose app
