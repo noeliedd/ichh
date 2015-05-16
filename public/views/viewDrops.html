@@ -7,14 +7,16 @@
             <h3>View Drops</h3>   
             <form><!--query drop form-->
               <div ng-controller="DropCriteriaCtrl">
-                  <div class="row"><!--Date To row-->             
+                
+                  <div class="row"><!--Dropdown row-->             
                         <label>Route:</label>
                         <div class="col-md-12">
                           <select ng-model="selectedRoute" ng-options="route as route.name for route in routes " class="form-control">  
                               <option value="">All</option>
                           </select>                                         
                         </div>                 
-                  </div><!--END row-->                 
+                  </div><!--END dropdown row--> 
+                
                   <div class="row"><!--Date From row-->
                       <label>From:</label>
                       <div class="col-md-12">
@@ -27,7 +29,8 @@
                             </span>
                           </p>
                       </div>
-                  </div><!--END row-->
+                  </div><!--END date from row-->
+                
                   <div class="row"><!--Date To row-->
                       <label>To:</label>
                       <div class="col-md-12">
@@ -40,25 +43,26 @@
                             </span>
                           </p>
                       </div>
-                      <button type="submit" id ="queryDropsBtn" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="submitQuery()" id="queryDropsBtn">Submit</button>
-                  </div><!--END row-->                    
+                      <button type="submit" id ="queryDropsBtn" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="submitQuery()" >Submit</button>
+                  </div><!--END date to row-->                    
               </div><!--END datepickerCtrl-->
-                  <div class = "row">
-                    <h4 style="margin-top:40px">Query Results:</h4>
-                    <table class="table table-striped table-bordered " style="text-align:right; width:90%; margin:auto">   
-                      <tr>
-                          <th>Total Met:</th>
-                          <th>Total Fed:</th>
-                          <th>Total Clothed:</th>                        
-                      </tr>
-                      <tr>
-                          <td><b>{{totalMet}}</b></td>
-                          <td><b>{{totalFed}}</b></td>
-                          <td><b>{{totalClothed}}</b></td>                        
-                      </tr>
-                    </table>
-                  </div>
-            </form><!--END query drop form--> 
+              
+              <div class = "row"><!--query result row--> 
+                  <h4 style="margin-top:40px">Query Results:</h4>
+                  <table class="table table-striped table-bordered " style="text-align:right; width:90%; margin:auto">   
+                    <tr>
+                      <th>Total Met:</th>
+                      <th>Total Fed:</th>
+                      <th>Total Clothed:</th>                        
+                    </tr>
+                    <tr>
+                      <td><b>{{totalMet}}</b></td>
+                      <td><b>{{totalFed}}</b></td>
+                      <td><b>{{totalClothed}}</b></td>                        
+                    </tr>
+                  </table>
+              </div><!--END query result row--> 
+          </form><!--END query drop form--> 
        </div>
-  </div>
+  </div><!--END row--> 
 </div><!--END container-->

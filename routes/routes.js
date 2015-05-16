@@ -90,10 +90,12 @@ module.exports = function(app) {
   app.post("/api/addUser", user.addUser);
   app.post("/api/editUser", user.editUser);  
   app.get('/api/getUsers', user.getUsers);
+  app.get('/api/getUserById', user.getUserById);  
   app.post("/api/addRoute", route.addRoute);
   app.post("/api/editRoute", route.editRoute);
   app.get("/api/getAllRoutes", route.getAllRoutes);
   app.get("/api/getRouteDrop", routeDrop.getRouteDrop);
+  app.get("/api/getOrders", routeOrder.getOrders);
 
   // route to handle all angular requests
   app.get('*', function(req, res) {

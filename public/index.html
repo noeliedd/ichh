@@ -30,6 +30,7 @@
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 </head>
+  
 <body ng-app="ichhApp" >
   <div class="container-fluid">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -52,7 +53,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Admin <span class="caret"></span></a>
+              <a href ='' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/addEditUser">Add/Edit User</a></li>
                 <li><a href="/listUsers">List Users</a></li>
@@ -65,14 +66,13 @@
           </ul>    
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Route Admin <span class="caret"></span></a>
+              <a href ='' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Route Admin <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/addRoute">Add Route</a></li>                
                 <li><a href="/editRoute">Edit Route</a></li>
+                <li><a href="/listRoutes">List Routes</a></li>                
                 <li class="divider"></li>
-                <li><a href="/listRoutes">List Routes</a></li>
                 <li><a href="/viewDrops">View Drops</a></li>
-                <li class="divider"></li>
                 <li><a href="/viewOrders">View Orders</a></li>
               </ul>
             </li>
@@ -80,6 +80,7 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
   </nav>    
+    
 	<!-- ANGULAR DYNAMIC CONTENT -->
 	<div ng-view></div>
 </div>

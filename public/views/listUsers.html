@@ -1,26 +1,26 @@
 <div class ="container">
   <div class="jumbotron">
-    <h3>List Users</h3>     
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered"  id="searchTextResults">
-          <tr>
-          <div class ="form-group">
-            <input placeholder="User Search.." style="width:70%; margin:auto" type="text" ng-model="searchText" class="form-control">          
-          </div>        
-              <th><a href="" ng-click="predicate='-firstName'; reverse=!reverse">First Name</a></th>
-              <th><a href="" ng-click="predicate='-surname'; reverse=!reverse">Surname</a></th>
-              <th><a href="" ng-click="predicate='-email'; reverse=!reverse">Email</a></th>
-              <th><a href="" ng-click="predicate='-admin'; reverse=!reverse">Admin User</a></th>
-              <th>Phone Number</th>
-          
-          <tr ng-repeat="user in users | filter:searchText | orderBy:predicate:reverse">
-              <td>{{user.firstName}}</td>
-              <td>{{user.surname}}</td>      
-              <td>{{user.email}}</td>
-              <td>{{user.admin}}</td>
-              <td>{{user.phoneNumber}}</td>        
-          </tr>
-     </table>
-  </div>    
-</div>
+        <h3>List Users</h3>     
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered"  id="searchTextResults">
+            <tr>
+            <div class ="form-group">
+              <input placeholder="User Search.." style="width:70%; margin:auto" type="text" ng-model="searchText" class="form-control">          
+            </div>        
+                <th><a href="" ng-click="predicate='-firstName'; reverse=!reverse">First Name</a></th>
+                <th><a href="" ng-click="predicate='-surname'; reverse=!reverse">Surname</a></th>
+                <th><a href="" ng-click="predicate='-email'; reverse=!reverse">Email</a></th>
+                <th><a href="" ng-click="predicate='-admin'; reverse=!reverse">Admin User</a></th>
+                <th>Phone Number</th>
+
+            <tr ng-repeat="user in users | filter:searchText | orderBy:predicate:reverse">
+                <td>{{user.firstName}}</td>
+                <td>{{user.surname}}</td>      
+                <td>{{user.email}}</td>
+                <td>{{user.admin}}</td>
+                <td>{{user.phoneNumber}}</td>        
+            </tr>
+       </table>
+  </div> <!--END jumbotron-->    
+</div><!--END container--> 
 

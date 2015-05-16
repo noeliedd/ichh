@@ -6,6 +6,7 @@ var transporter = nodemailer.createTransport({
         pass: 'homeless'
     }
 });
+
 module.exports.addUser = function(req,res){  
   var user = new User(req.body);  
   user.password = Math.random().toString(36).substring(7);
@@ -45,6 +46,14 @@ module.exports.editUser = function(req,res){
 //--------------------------------------------------------------------------------
 module.exports.getUsers = function(req,res){  
   User.find({},'-password', function (err, results) {
+    res.json(results);   
+    console.log(results); 
+  });
+}
+
+module.exports.getUserById = function(req,res){  
+  console.log(req.query._id);
+  User.findOne({_id: req.query._id},'-password -email -phoneNumber -admin', function (err, results) {
     res.json(results);   
     console.log(results); 
   });

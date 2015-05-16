@@ -1,7 +1,7 @@
 angular.module('RouteDropsCtrl', [])
 
 //Controller initialises a google map with no markers set
-// Watches a shared data service, updates an array everytime the shared service changes and applies the markers and routes to the map
+// Watches two shared data service, updates an array everytime the shared service changes and applies the markers and routes to the map
 .controller('ViewDropsController', function($scope,DropsDataService,RoutesDataService) {
      var dropCoordinates =[];
      var dropDetails =[];
@@ -132,12 +132,29 @@ angular.module('RouteDropsCtrl', [])
     }   
   }                                  
 )
+
 //angular ui controller to get dates. Dates submitted are passed to the GetDrops and GetRoutes Services
 //These Services returns the routes selected and the drops for the given dates 
-.controller('DropCriteriaCtrl', function ($scope, GetDrops,GetRoute,GetActiveRoutes,DropsDataService,RoutesDataService ) {
-    GetActiveRoutes.then(function(d){
-         $scope.routes =d;
-    })
+.controller('DropCriteriaCtrl', function ($scope, GetDrops,GetRoute,GetActiveRoutes,DropsDataService,RoutesDataService,ShareDataService ) {
+       GetActiveRoutes.getRoute();
+       $scope.routes =[];
+       $scope.$watchCollection(function () {
+         return ShareDataService.getList();
+     },                  
+      function(newVal, oldVal) {
+           $scope.routes =[];
+           if(!angular.isDefined(newVal.length)){
+                $scope.routes.push(newVal);
+           }else{
+                for(var i =0; i<newVal.length;i++){
+                    $scope.routes.push(newVal[i]);
+                }             
+           }           
+      }, true);  
+  
+//     GetActiveRoutes.then(function(d){
+//          $scope.routes =d;
+//     })
     $scope.openFrom = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -161,18 +178,18 @@ angular.module('RouteDropsCtrl', [])
      }else{
         if(!angular.isDefined($scope.selectedRoute)||$scope.selectedRoute ===null){
             GetRoute.getRoute("all").then(function(d){
-                $scope.lists = RoutesDataService.getList();
+              $scope.lists = RoutesDataService.getList();
 
                 GetDrops.getDrops($scope.fromDate,$scope.toDate,"all").then(function(d){
-                    $scope.lists = DropsDataService.getList();
+                  $scope.lists = DropsDataService.getList();
                 }); 
              });      
          }else{
-            GetRoute.getRoute($scope.selectedRoute._id).then(function(d){
-                $scope.lists = RoutesDataService.getList();          
+             GetRoute.getRoute($scope.selectedRoute._id).then(function(d){
+               $scope.lists = RoutesDataService.getList();          
 
-                GetDrops.getDrops($scope.fromDate,$scope.toDate,$scope.selectedRoute._id).then(function(d){
-                $scope.lists = DropsDataService.getList();
+               GetDrops.getDrops($scope.fromDate,$scope.toDate,$scope.selectedRoute._id).then(function(d){
+                 $scope.lists = DropsDataService.getList();
                 });  
              }); 
          }   

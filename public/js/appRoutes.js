@@ -1,8 +1,7 @@
 angular.module('appRoutes', []).config(function($routeProvider, $locationProvider,$httpProvider) {
 
 	$routeProvider
-
-		// home page
+		// login page
 		.when('/', {
 			templateUrl: 'views/login.html',
 			controller: 'LoginCtrl'
@@ -77,9 +76,15 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
             },
             responseError: function(response)
             {
-                if (response.status === 401)
+                if (response.status === 401){
+                    alert('Invalid Login Credentials '+ response.status);
                     $location.url('/');
-                    return $q.reject(response);
+                    return $q.reject(response);                  
+                }else if(response.status === 502){
+                    alert('Error Connecting to server '+ response.status);
+                    $location.url('/');
+                    return $q.reject(response);                   
+                }
             }
         };
     }); 

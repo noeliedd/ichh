@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 dbSchema = {  
     user: {
         firstName: {type :String, required: true},
@@ -18,7 +19,7 @@ dbSchema = {
         path : { type : Array , "default" : [] }
     },
     routeDrop:{
-        routeId:{type:String, required: true},
+        routeId:{type:mongoose.Schema.Types.ObjectId, required: true},
         date:{type: Date, default: Date.now},
         totalMale:{type: Number, default: 0},
         totalMaleFed:{type: Number, default: 0},
@@ -29,8 +30,8 @@ dbSchema = {
         coordinates : { type : Array , "default" : [] }
     },
     routeOrder:{
-        routeId:{type:String, required: true},
-        userId:{type:String, required: true}, 
+        routeId:{type:mongoose.Schema.Types.ObjectId, required: true},
+        userId:{type:mongoose.Schema.Types.ObjectId, required: true}, 
         name:{type:String, required: true},
         details:{type:String, required: true},
         date:{type: Date, default: Date.now},

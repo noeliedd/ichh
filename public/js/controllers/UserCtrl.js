@@ -14,30 +14,60 @@ var app =angular.module('UserCtrl', [])
           addUser.$save(function(response) {
             if(response.firstName){
               alert("User Added");
+              $scope.firstName ="";
+              $scope.surname ="";
+              $scope.email ="";
+              $scope.phoneNumber ="";
+              $scope.adminCheck = false;
             }else{
               alert("Error occurred, user not inserted");
             }
         }, function(error) {
             alert(502 +"Internal Server Error ");
-        });         
-        $scope.firstName ="";
-        $scope.surname ="";
-        $scope.email ="";
-        $scope.phoneNumber ="";
-        $scope.adminCheck = false;
-      }
+        });
+     }
   }                                 
 ])
-.controller('ListUsersController',function($scope,GetUsers) {
+.controller('ListUsersController',function($scope,GetUsers,ShareDataService) {
     $scope.predicate = 'firstName';
-    $scope.users = GetUsers.then(function(d){
-           $scope.users =d;
-    });  
+    $scope.users =[];
+    GetUsers.getUsers();
+       $scope.$watchCollection(function () {
+         return ShareDataService.getList();
+     },                  
+      function(newVal, oldVal) {
+           $scope.users =[];
+           if(!angular.isDefined(newVal.length)){
+                $scope.users.push(newVal);
+           }else{
+                for(var i =0; i<newVal.length;i++){
+                    $scope.users.push(newVal[i]);
+                }             
+           }           
+      }, true);    
+  
+//     $scope.users = GetUsers.then(function(d){
+//            $scope.users =d;
+//     });  
 })
-.controller('EditUsersCtrl', function($scope,GetUsers,$http) {
-      GetUsers.then(function(d){
-           $scope.users =d;
-      });   
+.controller('EditUsersCtrl', function($scope,$http,ShareDataService) {
+     $scope.users =[];
+     $scope.$watchCollection(function () {
+        return ShareDataService.getList();
+     },                  
+      function(newVal, oldVal) {
+           $scope.users =[];
+           if(!angular.isDefined(newVal.length)){
+                $scope.users.push(newVal);
+           }else{
+                for(var i =0; i<newVal.length;i++){
+                    $scope.users.push(newVal[i]);
+                }             
+           }           
+      }, true); 
+//       GetUsers.then(function(d){
+//            $scope.users =d;
+//       });   
       $scope.editUser = function(){
         var user =$scope.selectedUser;
         console.log(user);

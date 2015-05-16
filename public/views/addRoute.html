@@ -1,7 +1,7 @@
-<div class = "container-fluid">
+<div class = "container-fluid" >
     <div class="row">
         <div class="col-md-9">
-            <div id ="map"></div> 
+            <div id ="map"></div><!--map container-->  
             <div class="row">
               <div class="col-md-6">
                   <button ng-click ="clearMap()"class="btn btn-lg btn-primary center-block btn-block btn-signin">Clear Entire Map</button>
@@ -9,49 +9,50 @@
               <div class="col-md-6"> 
                   <button ng-click ="clearLastMarker()"class="btn btn-lg btn-primary center-block btn-block btn-signin">Clear Last Marker</button>
               </div>
-            </div>          
-         </div>
+            </div><!--END row-->           
+        </div><!--END col--> 
+      
         <div class ="col-md-3">
-          <form ng-submit="saveRoute()" class ="form-horizontal">
-            <h3>Add Route</h3>
-            <div class = "form-group">
-              <label class = "col-lg-cotrol-label">Route Name:</label>
-              <div class ="col-lg-10">
-                <input type="text" class ="form-control" ng-model="name" placeholder="Route Name...">
-              </div>
-            </div> 
-            <div class = "form-group">
-              <label class = "col-lg-cotrol-label">Route Beginning:</label>
-              <div class ="col-lg-10">
-                <input type="text" class ="form-control" ng-model="routeBeginning" placeholder="Route Begins...">
-              </div>
-            </div>  
-            <div class = "form-group">
-              <label class = "col-lg-cotrol-label">Route Ending:</label>
-              <div class ="col-lg-10">
-                <input type="text" class ="form-control" ng-model="routeEnding" placeholder="Route Ending...">
-              </div>
-            </div>                
-            <div class = "form-group">
-              <label class = "col-lg-cotrol-label">Description:</label>
-              <div class ="col-lg-10">
-                <textarea class="form-control" rows ="4" placeholder="Description..." ng-model="description"></textarea>
-              </div>
-            </div>    
-            <div class="form-group">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" ng-model="isActive" ng-init="isActive=false"  ng-true-value="true" ng-false-value="false">Make Route Active
-                </label>
-              </div>                  
-            </div>
-            <div class="form-group">
-              <div class ="col-lg-10">
-                <label id ="routeDistance">Total Distance Km :</label> 
-                <button type="submit" class = "btn btn-lg btn-primary center-block btn-block btn-signin">Save New Route</button>
-              </div>  
-            </div>  
-          </form>
-      </div>
-  </div>
-</div>
+            <form ng-submit="saveRoute()" class ="form-horizontal">
+                <h3>Add Route</h3>
+                <div class = "form-group">
+                  <label class = "col-lg-cotrol-label">Route Name:</label>
+                  <div class ="col-lg-10">
+                    <input type="text" class ="form-control" ng-model="name" placeholder="Route Name...">
+                  </div>
+                </div> 
+                <div class = "form-group">
+                  <label class = "col-lg-cotrol-label">Route Beginning:</label>
+                  <div class ="col-lg-10">
+                    <input type="text" class ="form-control" ng-model="routeBeginning" placeholder="Route Begins...">
+                  </div>
+                </div>  
+                <div class = "form-group">
+                  <label class = "col-lg-cotrol-label">Route Ending:</label>
+                  <div class ="col-lg-10">
+                    <input type="text" class ="form-control" ng-model="routeEnding" placeholder="Route Ending...">
+                  </div>
+                </div>                
+                <div class = "form-group">
+                  <label class = "col-lg-cotrol-label">Description:</label>
+                  <div class ="col-lg-10">
+                    <textarea class="form-control" rows ="4" placeholder="Description..." ng-model="description"></textarea>
+                  </div>
+                </div>    
+                <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="isActive" ng-init="isActive=false"  ng-true-value="true" ng-false-value="false">Make Route Active
+                    </label>
+                  </div>                  
+                </div>
+                <div class="form-group">
+                  <div class ="col-lg-10">
+                    <label id ="routeDistance">Total Distance Km :</label> 
+                    <button type="submit" class = "btn btn-lg btn-primary center-block btn-block btn-signin">Save New Route</button>
+                  </div>  
+                </div>  
+            </form><!--END add route form--> 
+        </div><!--END col--> 
+  </div><!--END row--> 
+</div><!--END container--> 
