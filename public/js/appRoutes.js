@@ -8,9 +8,10 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 		})
 		.when('/home', {
 			templateUrl: 'views/home.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }    
+      controller: 'HomeController',
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
 		})  
 		.when('/addEditUser', {
 			templateUrl: 'views/addEditUser.html',
@@ -54,9 +55,22 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 //           loggedin: checkLoggedin
 //         }    
 		})  
+		.when('/viewDropDetails', {
+			templateUrl: 'views/viewDropDetails.html',
+			controller: 'ViewDropDetailsController',
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
+		})   
 		.when('/viewOrders', {
 			templateUrl: 'views/viewOrders.html',
 			controller: 'ViewOrdersController',
+//         resolve: {
+//           loggedin: checkLoggedin
+//         }    
+		})   
+		.when('/userManual', {
+			templateUrl: 'views/userManual.html',
 //         resolve: {
 //           loggedin: checkLoggedin
 //         }    
@@ -70,12 +84,10 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
    .push(function($q, $location)
     {
         return {
-            response: function(response)
-            { 
+            response: function(response){ 
                 return response;
             },
-            responseError: function(response)
-            {
+            responseError: function(response){
                 if (response.status === 401){
                     alert('Invalid Login Credentials '+ response.status);
                     $location.url('/');
@@ -107,6 +119,7 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
         // User is Not Authenticated
         else
         {  console.log("Not logged in");
+            alert("Login Required");
             $rootScope.errorMessage = 'You need to log in.';
             deferred.reject();
             $location.url('/');

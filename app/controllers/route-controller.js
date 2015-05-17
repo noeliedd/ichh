@@ -10,45 +10,56 @@ module.exports.addRoute = function(req,res){
       }      
   });
 }
+
 module.exports.editRoute = function(req,res){ 
-  console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
-  console.log(req.body);
   Route.update({_id:req.body._id}, {$set: { name: req.body.name, routeBeginning: req.body.routeBeginning, routeEnding: req.body.routeEnding, description: req.body.description, isActive: req.body.isActive }}, function(err,results){
       if(err){
          res.json(err);  
       }else{
-          console.log(results);
          res.json(results);
       } 
   });
 }
-//--------------------Returns all active routes from db----------------------
+//--------------------Returns all active routes from db without the path----------------------
 module.exports.getActiveRoutes = function(req,res){  
   Route.find({ 'isActive': true },'-path', function (err, results) {
-    res.json(results);   
-    console.log(results); 
+      if(err){
+         res.json(err);  
+      }else{
+         res.json(results);
+      }  
   });
 }
-//--------------------------Get Route for given id----------------------------
-//Called from mobile route selection tab to return the coordinates of chosen route
+
+//Returns all active routes or route object matching route id
 module.exports.getRoute   = function(req,res){  
-   console.log("req.query.route_id")
-   console.log(req.query.route_id);
+  // if req.query = all return all active route objects
   if(req.query.route_id === "all"){
-    Route.find({ 'isActive': true },'-isActive', function (err, results) {
-      res.json(results);   
-      console.log(results); 
-  });
+      Route.find({ 'isActive': true },'-isActive', function (err, results) {
+          if(err){
+             res.json(err);  
+          }else{
+             res.json(results);
+          } 
+      });
   }else{
-    Route.findOne({ '_id': req.query.route_id },'-dateCreated', function (err, results) {
-      res.json(results);   
-      console.log(results); 
-    });    
+    //else return object for req.route id
+      Route.findOne({ '_id': req.query.route_id },'-dateCreated', function (err, results) {
+        if(err){
+           res.json(err);  
+        }else{
+           res.json(results);
+        }    
+      });    
   } 
 }
+// Returns all the routes active or inactive
 module.exports.getAllRoutes = function(req,res){  
   Route.find({}, function (err, results) {
-    res.json(results);   
-    console.log(results); 
+      if(err){
+         res.json(err);  
+      }else{
+         res.json(results);
+      } 
   });
 }

@@ -9,9 +9,10 @@ module.exports = function(app) {
         session        = require('express-session'),   
         LocalStrategy  = require('passport-local').Strategy;
   
-  var User = require('../app/models/user');
-  app.use(cookieParser()); 
-  app.use(session({ secret: 'The Best Secret in the world', resave: true,saveUninitialized: true }));// For         Development, should not leave here     
+  var User = require('../app/models/user');//Used for passport authentication routes
+  
+  app.use(cookieParser()); //Parses passport cookies
+  app.use(session({ secret: 'The Best Secret in the world', resave: true,saveUninitialized: true }));// For Development, should not leave here     
   app.use(passport.initialize());
   app.use(passport.session());  
    
@@ -25,32 +26,24 @@ module.exports = function(app) {
     },'-password -phoneNumber', function(err, user) {
       if (err) {
         return done(err);
-      }
- 
+      } 
       else if (!user.length) {
-        console.log("Ther is no user found");
         return done(null, false);
       }else{
-        console.log("user.name");
-        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        console.log(user);
         return done(null, user);     
       }
     });
   }));
 
   passport.serializeUser(function(user, done) {
-    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     done(null, user);
   });
 
   passport.deserializeUser(function(user, done) {
-    console.log("00000000000000000000000000000000000000000000000000000000000");
     done(null, user);
   });
 
-  var auth = function(req, res, next)
-  {
+  var auth = function(req, res, next){
     if (!req.isAuthenticated())
       res.sendStatus(401);
     else
@@ -59,32 +52,27 @@ module.exports = function(app) {
 
 //---------------------- authentication routes---------------------------
   app.get('/loggedin', function(req, res){    
-    console.log("555555555555555555555555555555555555555555555");
-    console.log(req.session.passport.user);
-    console.log(req.user);
     res.send(req.isAuthenticated() ? req.user : '0');
   });
 
   app.post('/login', passport.authenticate('local'), function(req, res){
-    console.log(req.user);
     res.send(req.user);
   });
 
   app.post('/logout', function(req, res){
-    console.log("Hello logout");
     req.logOut();
     res.sendStatus(200);
   });   
 
 //--------------------server routes -------------------------------
 //-----------------Mobile REST API Calls---------------------------
-  app.post("/api/addRouteDrop", routeDrop.addRouteDrop);
-  app.post("/api/addRouteOrder", routeOrder.addRouteOrder);
+  app.post("/api/addRouteDrop", routeDrop.addRouteDrop);//passed route drop from mobile app
+  app.post("/api/addRouteOrder", routeOrder.addRouteOrder); //passed order from the mobile app
 
 //-----------------Mobile & Web REST API Calls----------------------  
-  app.get("/api/getActiveRoutes", route.getActiveRoutes);
-  app.get("/api/getRoute", route.getRoute);
-  app.get("/api/getPassword", user.getPassword);
+  app.get("/api/getActiveRoutes", route.getActiveRoutes);//returns all active routes in database
+  app.get("/api/getRoute", route.getRoute); //returns route object for route id passed
+  app.get("/api/getPassword", user.getPassword);// looks up db for given email and sends password if found
   
 // ---------------Angular frontend Website REST API--------------------
   app.post("/api/addUser", user.addUser);
@@ -94,7 +82,7 @@ module.exports = function(app) {
   app.post("/api/addRoute", route.addRoute);
   app.post("/api/editRoute", route.editRoute);
   app.get("/api/getAllRoutes", route.getAllRoutes);
-  app.get("/api/getRouteDrop", routeDrop.getRouteDrop);
+  app.get("/api/getRouteDrop", routeDrop.getRouteDrop); //
   app.get("/api/getOrders", routeOrder.getOrders);
 
   // route to handle all angular requests

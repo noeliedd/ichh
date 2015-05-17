@@ -1,13 +1,13 @@
 <div class ="container">
   <div class="jumbotron">
-      <h3>Orders</h3> 
+      <h3>Drop Details</h3>  
       <hr>
       <form><!--query drop form-->             
           <div class="row"><!--Date From row-->         
               <div class="col-md-1">   
                 <label>From:</label>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-3">
                   <p class="input-group">                  
                     <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fromDate" is-open="openedFrom" datepicker-options="dateOptions" close-text="Close" />
                     <span class="input-group-btn">
@@ -20,7 +20,7 @@
               <div class="col-md-1">   
                 <label>To:</label>
               </div>            
-              <div class="col-md-5">
+              <div class="col-md-3">
                   <p class="input-group">
                     <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDate" is-open="openedTo" datepicker-options="dateOptions" close-text="Close" />
                     <span class="input-group-btn">
@@ -28,27 +28,42 @@
                         <i class="glyphicon glyphicon-calendar"></i>
                       </button>
                     </span>
-                  </p>
-                  <button type="submit" id ="queryOrdersBtn" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="queryOrders()">Submit</button>              
-              </div>            
-          </div><!--END row-->     
+                  </p>              
+              </div> 
+              <div class="col-md-1">   
+                <label>Route:</label>
+              </div>              
+              <div class="col-md-3"><!--Dropdown col-->                 
+                <div class="col-md-12">
+                  <select ng-model="selectedRoute" ng-options="route as route.name for route in routes " class="form-control">  
+                    <option value="">All</option>
+                  </select>
+                  <br />
+                  <button type="submit" id ="queryDropDetailsBtn" class = "btn btn-lg btn-primary center-block btn-block btn-signin" ng-click="queryDropDetails()">Submit</button>                  
+                </div>                 
+              </div><!--END route dropdown col-->             
+          </div><!--END query row-->     
 
           <div class = "row">
             <h4 style="margin-top:40px">Query Results:</h4>
             <table class="table table-striped table-bordered " style="text-align:right; width:90%; margin:auto">   
               <tr>
                 <th>Route Name:</th>
-                <th>Volunteer Name:</th>
-                <th>Date of Order:</th> 
-                <th>Ordered By:</th>
-                <th>Order Details</th>
+                <th><a href="" ng-click="predicate='-dateCreated'; reverse=!reverse">Active Since:</a></th>                
+                <th><a href="" ng-click="predicate='-totalMet'; reverse=!reverse">Total Met:</a></th>
+                <th>Male:</th>
+                <th>Female:</th> 
+                <th><a href="" ng-click="predicate='-totalFed'; reverse=!reverse">Fed:</a></th>
+                <th><a href="" ng-click="predicate='-totalClothed'; reverse=!reverse">Clothed:</a></th>
               </tr>
-              <tr ng-repeat="order in orders">
-                  <td>{{order.routeName}}</td>
-                  <td>{{order.userName}}</td>      
-                  <td>{{order.date | date:'dd/MM/yyyy'}}</td>
-                  <td>{{order.name}}</td>
-                  <td>{{order.details}}</td>        
+              <tr ng-repeat="drop in drops |orderBy:predicate:reverse">
+                  <td>{{drop.name}}</td>
+                  <td>{{drop.dateCreated | date:'dd/MM/yyyy'}}</td>
+                  <td>{{drop.totalMet}}</td>
+                  <td>{{drop.totalMale}}</td>      
+                  <td>{{drop.totalFemale}}</td>
+                  <td>{{drop.totalFed}}</td>
+                  <td>{{drop.totalClothed}}</td>        
               </tr>
             </table>
           </div><!--END row--> 

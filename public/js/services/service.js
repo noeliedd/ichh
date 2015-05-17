@@ -38,15 +38,8 @@ angular.module('Service', [])
   };
 })
 
-//Returns all users from the server, Called from UserCtrl.js 'ListUsersController.
-//Used for the list users page
-// .factory('GetUsers', function($http) {
-//       var promise = $http.get('/api/getUsers').then(function (response) {
-//          return response.data;
-//       });
-//       return promise;
-// })
-
+//Returns all user objects from the server
+//Updates a shared service that can be used throughout the application
 .factory('GetUsers', function($http,ShareDataService) {
   var GetUsers = {
       getUsers: function() { 
@@ -61,9 +54,8 @@ angular.module('Service', [])
   return GetUsers;
 })
 
-//Called from RouteCtrl.js 'ListRoutesController' and 'EditRouteController'
-//Used to return all routes for list route and edit route page
-
+//Returns all route objects from the server
+//Updates a shared service that can be used throughout the application
 .factory('GetAllRoutes', function($http,ShareDataService) {
   var GetAllRoutes = {
       getRoutes: function() { 
@@ -78,21 +70,9 @@ angular.module('Service', [])
   return GetAllRoutes;
 })
 
-// .factory('GetAllRoutes', function($http) {
-//       var promise = $http.get('/api/getAllRoutes').then(function (response) {
-//           return response.data;
-//       });
-//       return promise;
-// })
 
-//Called in RouteDropsCtrl 'DropCriteriaCtrl', used to populate the drop down list on view drops page
 //Returns all the active routes from the server
-// .factory('GetActiveRoutes', function($http) {
-//       var promise = $http.get('/api/getActiveRoutes').then(function (response) {
-//         return response.data;
-//       });
-//       return promise;
-// })
+//Updates the shared service that is used throughout the application
 .factory('GetActiveRoutes', function($http,ShareDataService) {
   var GetActiveRoutes = {
       getRoute: function() { 
@@ -106,6 +86,7 @@ angular.module('Service', [])
   };
   return GetActiveRoutes;
 })
+
 //Called from the RoteDropsCtrl.js 'DropCriteriaCtrl'
 //function getRoute takes in the route id for selected route in the view drops page
 //Server returns route objects including their path. Response is passed to the 'RoutesDataService' for updating google map
@@ -226,6 +207,7 @@ angular.module('Service', [])
   };
 })
 
+//Shared service used throughout the application, updated with route objects, user objects etc
 .service('ShareDataService', function() {
   var myList = [];
   var addList = function(newObj) {
