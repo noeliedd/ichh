@@ -121,12 +121,13 @@ angular.module('Service', [])
   return GetDrops;
 })
 
-.factory('GetDropDetails', function($http,DropDetailsDataService) {
+
+.factory('GetDropsData', function($http,DetailsDataService) {
   var GetDrops = {
       getDrops: function(fromDate, toDate,routeId) {
           var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId)
           .then(function (response) {
-               DropDetailsDataService.addList(response.data);
+               DetailsDataService.addList(response.data);
              return response.data;
           });
           return promise;
@@ -221,7 +222,8 @@ angular.module('Service', [])
   };
 })
 
-.service('DropDetailsDataService', function() {
+//Shared service used throughout the application, updated with route objects, user objects etc
+.service('ShareDataService', function() {
   var myList = [];
   var addList = function(newObj) {
       myList = [];
@@ -235,8 +237,9 @@ angular.module('Service', [])
     getList: getList
   };
 })
-//Shared service used throughout the application, updated with route objects, user objects etc
-.service('ShareDataService', function() {
+
+
+.service('DetailsDataService', function() {
   var myList = [];
   var addList = function(newObj) {
       myList = [];
