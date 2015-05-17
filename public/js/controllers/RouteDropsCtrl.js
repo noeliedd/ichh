@@ -229,7 +229,7 @@ angular.module('RouteDropsCtrl', [])
 })
 
 //Used for the viewDropDetails page 
-.controller('ViewDropDetailsController', function($scope,GetDrops,GetActiveRoutes,ShareDataService,RoutesDataService,DropsDataService) {
+.controller('ViewDropDetailsController', function($scope,GetDropDetails,GetActiveRoutes,ShareDataService,RoutesDataService,DropDetailsDataService) {
   
        GetActiveRoutes.getRoute();//updates shared service
        $scope.routes =[];//used for the dropdown route menu on the view
@@ -278,7 +278,7 @@ angular.module('RouteDropsCtrl', [])
               }else{
                   // if no route selected get all drops for all routes matching dates
                   if(!angular.isDefined($scope.selectedRoute)||$scope.selectedRoute ===null){
-                          GetDrops.getDrops($scope.fromDate,$scope.toDate,"all").then(function(d){
+                          GetDropDetails.getDrops($scope.fromDate,$scope.toDate,"all").then(function(d){
                               //set equal to array for dropdown menu
                               $scope.drops = $scope.routes;
                               //Loop through array of drops(route objects)
@@ -323,7 +323,7 @@ angular.module('RouteDropsCtrl', [])
                    }else{
                          //If selected route is defined then send the id with the dates to the GetDrops service
                          $scope.drops =[];//empty cloned route array
-                         GetDrops.getDrops($scope.fromDate,$scope.toDate,$scope.selectedRoute._id).then(function(d){
+                         GetDropDetails.getDrops($scope.fromDate,$scope.toDate,$scope.selectedRoute._id).then(function(d){
                              //push the selected route onto the array
                              $scope.drops.push($scope.selectedRoute);
                              var totalMet =0;

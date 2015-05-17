@@ -104,7 +104,7 @@ angular.module('Service', [])
   return GetRoute;
 })
 
-//Called from the RoteDropsCtrl.js 'DropCriteriaCtrl'
+//Called from the RouteDropsCtrl.js 'DropCriteriaCtrl'
 //function getDrops takes in the dates and routeId selected in the view drops page
 //Server returns drop objects including their coordinates. Response is passed to the 'DropsDataService' for updating google map
 .factory('GetDrops', function($http,DropsDataService) {
@@ -113,6 +113,20 @@ angular.module('Service', [])
           var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId)
           .then(function (response) {
                DropsDataService.addList(response.data);
+             return response.data;
+          });
+          return promise;
+       }
+  };
+  return GetDrops;
+})
+
+.factory('GetDropDetails', function($http,DropDetailsDataService) {
+  var GetDrops = {
+      getDrops: function(fromDate, toDate,routeId) {
+          var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId)
+          .then(function (response) {
+               DropDetailsDataService.addList(response.data);
              return response.data;
           });
           return promise;
@@ -207,6 +221,20 @@ angular.module('Service', [])
   };
 })
 
+.service('DropDetailsDataService', function() {
+  var myList = [];
+  var addList = function(newObj) {
+      myList = [];
+      myList = newObj;
+  }
+  var getList = function(){
+      return myList;
+  }
+  return {
+    addList: addList,
+    getList: getList
+  };
+})
 //Shared service used throughout the application, updated with route objects, user objects etc
 .service('ShareDataService', function() {
   var myList = [];
