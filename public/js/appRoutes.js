@@ -9,71 +9,71 @@ angular.module('appRoutes', []).config(function($routeProvider, $locationProvide
 		.when('/home', {
 			templateUrl: 'views/home.html',
       controller: 'HomeController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})  
 		.when('/addEditUser', {
 			templateUrl: 'views/addEditUser.html',
 			controller: 'AddUserController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }
+        resolve: {
+          loggedin: checkLoggedin
+        }
     })
 		.when('/listUsers', {
 			templateUrl: 'views/listUsers.html',
 			controller: 'ListUsersController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})  
 		.when('/addRoute', {
 			templateUrl: 'views/addRoute.html',
 			controller: 'AddRouteController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }     
+        resolve: {
+          loggedin: checkLoggedin
+        }     
 		})  
 		.when('/listRoutes', {
 			templateUrl: 'views/listRoutes.html',
 			controller: 'ListRoutesController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})  
 		.when('/editRoute', {
 			templateUrl: 'views/editRoute.html',
 			controller: 'EditRouteController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})    
 		.when('/viewDrops', {
 			templateUrl: 'views/viewDrops.html',
 			controller: 'ViewDropsController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})  
 		.when('/viewDropDetails', {
 			templateUrl: 'views/viewDropDetails.html',
 			controller: 'ViewDropDetailsController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})   
 		.when('/viewOrders', {
 			templateUrl: 'views/viewOrders.html',
 			controller: 'ViewOrdersController',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})   
 		.when('/userManual', {
 			templateUrl: 'views/userManual.html',
-//         resolve: {
-//           loggedin: checkLoggedin
-//         }    
+        resolve: {
+          loggedin: checkLoggedin
+        }    
 		})   
     .otherwise({
     redirectTo: '/'
