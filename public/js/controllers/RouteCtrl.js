@@ -139,11 +139,11 @@ draws a route between these markers using googles polyline objects
 // Calls the GetAllRoutes service which queries server for routes
 // GetAllRoutes passes response to sharedDataService which is watched below
 //This is used on the ListRoutes page (d = response objects)
-.controller('ListRoutesController',function($scope,GetAllRoutes,ShareDataService) {
+.controller('ListRoutesController',function($scope,GetAllRoutes,AllRoutesService) {
     $scope.routes =[];
     GetAllRoutes.getRoutes();
        $scope.$watchCollection(function () {
-         return ShareDataService.getList();
+         return AllRoutesService.getList();
      },                  
       function(newVal, oldVal) {
            $scope.routes =[];
@@ -161,12 +161,12 @@ draws a route between these markers using googles polyline objects
 //Again it watches the sharedDataService for response
 //This is used on the EditRoute page (d = response objects)
 //$scope.editRoute posts the edited route object to the server
-.controller('EditRouteController', function($scope,GetAllRoutes,$http,ShareDataService) {
+.controller('EditRouteController', function($scope,GetAllRoutes,$http,AllRoutesService) {
     $scope.routes =[]; //used in view to search for routes
     GetAllRoutes.getRoutes();
-  
+    
        $scope.$watchCollection(function () {
-         return ShareDataService.getList();
+         return AllRoutesService.getList();
      },                  
       function(newVal, oldVal) {
            $scope.routes =[];

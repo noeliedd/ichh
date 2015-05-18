@@ -56,12 +56,12 @@ angular.module('Service', [])
 
 //Returns all route objects from the server
 //Updates a shared service that can be used throughout the application
-.factory('GetAllRoutes', function($http,ShareDataService) {
+.factory('GetAllRoutes', function($http,AllRoutesService) {
   var GetAllRoutes = {
       getRoutes: function() { 
           var promise = $http.get('/api/getAllRoutes')
           .then(function (response) {
-             ShareDataService.addList(response.data);
+             AllRoutesService.addList(response.data);
              return response.data;
           });
           return promise;
@@ -113,6 +113,7 @@ angular.module('Service', [])
           var promise = $http.get('/api/getRouteDrop?from='+fromDate+'&to='+toDate+'&routeId='+routeId)
           .then(function (response) {
                DropsDataService.addList(response.data);
+            console.log(response.data);
              return response.data;
           });
           return promise;
@@ -238,7 +239,20 @@ angular.module('Service', [])
   };
 })
 
-
+.service('AllRoutesService', function() {
+  var myList = [];
+  var addList = function(newObj) {
+      myList = [];
+      myList = newObj;
+  }
+  var getList = function(){
+      return myList;
+  }
+  return {
+    addList: addList,
+    getList: getList
+  };
+})
 .service('DetailsDataService', function() {
   var myList = [];
   var addList = function(newObj) {

@@ -9,7 +9,7 @@ angular.module('RouteDropsCtrl', [])
      var routeCoordinates =[]; // stores route objects, each route added as polyline object
      var polylines=[]; //Used to store polylines objects in order to clear the map 
      var markerArray =[]; //dropCoordinates are converted to google LatLng Literals and stored in this array 
-  
+      
 //variables for the query result table  
      $scope.totalMet = 0;
      $scope.totalFed = 0;
@@ -17,10 +17,11 @@ angular.module('RouteDropsCtrl', [])
   
 //watches the DropsDataService for returned route drop objects from server  
 //pushes new objects to dropCoordinates array 
-     $scope.$watch(function () {
+     $scope.$watchCollection(function () {
          return DropsDataService.getList();
      },                  
       function(newVal, oldVal) {
+       console.log(newVal);
           dropCoordinates =[];
           for(var i =0; i<newVal.length;i++){
               dropCoordinates.push(newVal[i]);
@@ -34,6 +35,7 @@ angular.module('RouteDropsCtrl', [])
          return RoutesDataService.getList();
      },                  
       function(newVal, oldVal) {
+           console.log(newVal);
            routeCoordinates =[];
            if(!angular.isDefined(newVal.length)){
                 routeCoordinates.push(newVal);
@@ -75,7 +77,6 @@ angular.module('RouteDropsCtrl', [])
         oms.clearMarkers();
         setAllMap(null);
         markerArray=[];           
-
       
         for(var i =0; i<dropCoordinates.length;i++){
 
@@ -136,7 +137,7 @@ angular.module('RouteDropsCtrl', [])
       for(var i=0;i<routeCoordinates.length;i++){  
           var routes =[];
           for(var j=0; j<routeCoordinates[i].path.length;j++){
-            console.log(routeCoordinates[i].path[j].A);
+//          console.log(routeCoordinates[i].path[j].A);
             var lat = routeCoordinates[i].path[j].A;
             var lng = routeCoordinates[i].path[j].F;
             var coord = new google.maps.LatLng(lat,lng); 
@@ -154,7 +155,7 @@ angular.module('RouteDropsCtrl', [])
           }]});   
           poly.setMap(map);  
           polylines.push(poly);
-          routes =[];             
+          routes=[];             
       }
     }   
   }                                  
@@ -164,7 +165,7 @@ angular.module('RouteDropsCtrl', [])
 //These Services return response objects to the shared service used in the 'ViewDropsController' 
 .controller('DropCriteriaCtrl', function ($scope, GetDrops,GetRoute,GetActiveRoutes,DropsDataService,RoutesDataService,ShareDataService ) {
       //Service that returns all active routes and updates sharedDataService
-       GetActiveRoutes.getRoute();
+       GetActiveRoutes.getRoute();        
        $scope.routes =[]; // Used for the dropdown menu on the viewDrops page in view
   
       
@@ -210,8 +211,9 @@ angular.module('RouteDropsCtrl', [])
           if(!angular.isDefined($scope.selectedRoute)||$scope.selectedRoute ===null){
               GetRoute.getRoute("all").then(function(d){
                 $scope.lists = RoutesDataService.getList();
-
+console.log($scope.fromDate+$scope.toDate);
                   GetDrops.getDrops($scope.fromDate,$scope.toDate,"all").then(function(d){
+                    console.log("Im here baby");
                     $scope.lists = DropsDataService.getList();
                   }); 
                });      
@@ -230,7 +232,7 @@ angular.module('RouteDropsCtrl', [])
 })
 
 //Used for the viewDropDetails page 
-.controller('ViewDropDetailsController', function($scope,GetDropsData,GetActiveRoutes,DetailsDataService) {
+.controller('ViewDropDetailsController', function($scope,GetDropsData,GetActiveRoutes,ShareDataService) {
   
        GetActiveRoutes.getRoute();//updates shared service
        $scope.routes =[];//used for the dropdown route menu on the view
@@ -238,7 +240,7 @@ angular.module('RouteDropsCtrl', [])
 
   
        $scope.$watchCollection(function () {
-         return DetailsDataService.getList();
+         return ShareDataService.getList();
      },                  
       function(newVal, oldVal) {
            $scope.routes =[];
@@ -271,7 +273,7 @@ angular.module('RouteDropsCtrl', [])
 //----------------------  DATEPICKER END---------------------------------------------     
      
           $scope.queryDropDetails = function(){
-            
+              console.log($scope.selectedRoute);
               if(!angular.isDefined($scope.fromDate) ||!angular.isDefined($scope.toDate)){
                  alert("Invalid Date Selection, date missing");               
               }else if($scope.fromDate> $scope.toDate){
