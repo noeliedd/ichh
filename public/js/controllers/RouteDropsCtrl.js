@@ -147,8 +147,8 @@ angular.module('RouteDropsCtrl', [])
 //Each path coordinate converted to google LatLng object and pushed to array named route.
 //GoogleMap polyline object is created with its path set to the routes array
 //Each polyline object is then pushed to an array polylines. This is used to track the polylines on the map in order to clear later
-          arrowSymbol = {path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,strokeColor: '#FF0000',strokeOpacity: 1.0};
-          poly = new google.maps.Polyline({path: routes,strokeColor: '#FF0000',strokeOpacity: 1.0,strokeWeight: 2,icons: [{                      
+          arrowSymbol = {path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,strokeColor: '#000000',strokeOpacity: 1.0};
+          poly = new google.maps.Polyline({path: routes,strokeColor: '#000000',strokeOpacity: 1.0,strokeWeight: 2,icons: [{                      
             icon: arrowSymbol,
             offset: '100%',
             repeat:'55px',

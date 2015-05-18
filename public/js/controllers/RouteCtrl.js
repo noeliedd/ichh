@@ -25,7 +25,7 @@ draws a route between these markers using googles polyline objects
       marker = new google.maps.Marker({map: map,position: coords,icon: image});    
       
       var polyOptions = {
-        strokeColor: '#FF0000',
+        strokeColor: '#000000',
         strokeOpacity: 1.0,
         strokeWeight: 2 
       };
